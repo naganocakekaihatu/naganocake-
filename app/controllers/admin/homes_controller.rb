@@ -4,3 +4,8 @@ module Admin
     end
   end
 end
+=======
+class HomesController < ApplicationController
+  def top
+  end
+end
