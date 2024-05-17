@@ -1,4 +1,6 @@
-class OrderDetailsController < ApplicationController
-  def update
+module Admin
+  class OrderDetailsController < ApplicationController
+    def update
+    end
   end
 end
