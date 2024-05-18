@@ -14,8 +14,8 @@ Rails.application.routes.draw do
     resources :customers
     resources :cart_items
     resources :orders
-    resources :addresses
-  end
+    resources :addresses, param: :id, only: [:index, :create, :edit, :updated, :destroy]
+    end
     
   namespace :admin do
     resources :sessions

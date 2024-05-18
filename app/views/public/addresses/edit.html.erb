@@ -1,2 +1,23 @@
-<h1>Addresses#edit</h1>
+<h1>配送先住所</h1>
+<%= form_for @address, url:address_path(@address), method: :patch do |f| %>
+
+<div>
+ <%= f.label :郵便番号 %>
+ <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
+</div>
+
+<div>
+  <%= f.label :住所 %>
+  <%= f.text_field :address, autofocus: true, autocomplete: "address" %>
+</div>
+
+<div>
+  <%= f.label :宛名 %>
+  <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+</div>
+
+<div>
+<%= f.submit "編集する", class:"btn btn-primary" %>
+</div>
+<% end %>
 <p>Find me in app/views/addresses/edit.html.erb</p>
