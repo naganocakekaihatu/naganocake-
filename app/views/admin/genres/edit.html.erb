@@ -1,2 +1,19 @@
-<h1>Genres#edit</h1>
-<p>Find me in app/views/genres/edit.html.erb</p>
+<h1>ジャンル編集</h1>
+
+<% if @genre.errors.any? %>
+  <%= @genre.errors.count %>件のエラーが発生しました。
+  <ul>
+    <% @genre.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div>
+  <%= form_with model: @genre, url: admin_genre_path do |f| %>
+    <%= f.label :ジャンル名 %>
+    <%= f.text_field :name %>
+    
+    <%= f.submit "更新" %>  
+  <% end %>
+</div>
