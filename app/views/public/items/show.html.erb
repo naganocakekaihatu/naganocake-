@@ -1,0 +1,19 @@
+<h1>商品詳細</h1>
+<p><%= link_to "商品一覧へ", items_path %></p>
+<p>
+  <% if @item.image.attached? %>
+    <%= image_tag @item.image, size:"200x200" %>
+  <% else %>
+    <%= image_tag "no-image", size:"200x200" %>
+  <% end %>  
+</p>
+<p><%= @item.genre.name %></p>
+<p><%= @item.name %></p>
+<p><%= @item.price %>円</p>
+<% if @item.is_active %>
+  <p>販売中</p>
+<% else %>
+  <p>販売停止</p>
+<% end %>
+</p>
+<p><%= @item.introduction %></p>
