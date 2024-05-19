@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
-  def change
-    create_table :customers do |t|
+class AddDeviseToAdmins < ActiveRecord::Migration[6.1]
+  def self.up
+    change_table :admins do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -31,21 +31,21 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
       # t.integer  :failed_attempts, default: 0, null: false # Only if lock strategy is :failed_attempts
       # t.string   :unlock_token # Only if unlock strategy is :email or :both
       # t.datetime :locked_at
-      t.string :family_name, null: false
-      t.string :first_name, null: false
-      t.string :family_name_kana, null: false
-      t.string :first_name_kana, null: false
-      t.string :telephone_number, null: false
-      t.string :postal_code, null: false
-      t.text :address, null: false
-      t.boolean :is_deleted, null: false, default: true
 
-      t.timestamps
+
+      # Uncomment below if timestamps were not included in your original model.
+      # t.timestamps null: false
     end
 
-    add_index :customers, :email,                unique: true
-    add_index :customers, :reset_password_token, unique: true
-    # add_index :customers, :confirmation_token,   unique: true
-    # add_index :customers, :unlock_token,         unique: true
+    add_index :admins, :email,                unique: true
+    add_index :admins, :reset_password_token, unique: true
+    # add_index :admins, :confirmation_token,   unique: true
+    # add_index :admins, :unlock_token,         unique: true
+  end
+
+  def self.down
+    # By default, we don't want to make any assumption about how to roll back a migration when your
+    # model already existed. Please edit below which fields you would like to remove in this migration.
+    raise ActiveRecord::IrreversibleMigration
   end
 end

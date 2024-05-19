@@ -1,5 +1,5 @@
-module Admin
-  class CustomersController < ApplicationController
+# module Admin　←モデル名Adminが存在し、名前がブッキングしてエラーになるのでコメントアウトしてます
+  class Admin::CustomersController < ApplicationController
     def index
     end
   
@@ -12,4 +12,4 @@ module Admin
     def update
     end
   end
-end
+# end
