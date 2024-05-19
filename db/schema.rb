@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 2024_05_18_025652) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
+end
+ActiveRecord::Schema.define(version: 2024_05_17_020028) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer "customer_id"
