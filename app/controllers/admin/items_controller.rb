@@ -1,5 +1,5 @@
-module Admin
-  class ItemsController < ApplicationController
+# module Admin ←モデル名Adminが存在し、名前がブッキングしてエラーになるのでコメントアウトしてます
+  class Admin::ItemsController < ApplicationController
     def index
       @items = Item.all
     end
@@ -53,4 +53,4 @@ module Admin
       params.require(:item).permit(:image, :genre_id, :name, :price, :introduction, :is_active)
     end
   end
-end
+# end
