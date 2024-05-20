@@ -1,3 +1,39 @@
-<h1>Customers#show</h1>
-<p>Find me in app/views/customers/show.html.erb</p>
-<%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+<h1 class="m-4">マイページ</h1>
+
+<div class="m-4">
+
+  <div class="d-flex m-2 text-left">
+    <div class="w-25 text-left">名前</div>
+    <div class="w-25 text-left"><%= @customer.family_name %><%= " " %><%= @customer.first_name %></div>
+  </div>
+  
+  <div class="d-flex m-2 text-left">
+    <div class="w-25 text-left">フリガナ</div>
+    <div class="w-25 text-left"><%= @customer.family_name_kana %><%= " " %><%= @customer.first_name_kana %></div>
+  </div>
+  
+  <div class="d-flex m-2 text-left">
+    <div class="w-25 text-left">電話番号</div>
+    <div class="w-25 text-left"><%= @customer.telephone_number %></div>
+  </div>
+  
+  <div class="d-flex m-2 text-left">
+    <div class="w-25 text-left">メールアドレス</div>
+    <div class="w-25 text-left"><%= @customer.email %></div>
+  </div>
+  
+  <div class="d-flex m-2 text-left">
+    <div class="w-25 text-left">郵便番号</div>
+    <div class="w-25 text-left"><%= @customer.postal_code %></div>
+  </div>
+  
+  <div class="d-flex m-2 text-left">
+    <div class="w-25 text-left">住所</div>
+    <div class="w-25 text-left"><%= @customer.address %></div>
+  </div>
+
+</div>
+
+<div class="m-3"><%= link_to "配送先を確認する", addresses_path %></div>
+
+<div class="m-3"><%= link_to "会員情報を編集する", edit_customer_path(@customer) %></div>

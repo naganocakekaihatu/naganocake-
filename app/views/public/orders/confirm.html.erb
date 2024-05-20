@@ -1,2 +1,69 @@
-<h1>Orders#confirm</h1>
-<p>Find me in app/views/orders/confirm.html.erb</p>
+<h1>注文情報確認画面</h1>
+<%= form_for  @order,url: '/orders/thanks'  do |f| %>
+<style media="screen">
+  table {
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    border: 1px #333 solid;
+    padding: 8px;
+  }
+</style>
+<div style="display: flex; flex-direction: row;">
+<table style="margin-right: 10px;">
+    <!--横に表示-->
+  <tr>
+    <th>商品名</th>
+    <th>単価(税込)</th>
+    <th>数量</th>
+    <th>小計</th>
+  </tr>
+   <!--@cart_items.each do |cart_item| -->
+  <tr>
+    <td><!--cart_item.item.item_name--></td>
+    <td><!--tax_included_price(cart_item.item.price)--></td>
+    <td><!--cart_item.amount --></td>
+    <td> <!--tax_included_price(cart_item.item.price) * cart_item.amount--></td>
+   <!--end -->
+  </tr>
+  </table>
+  <table>
+  
+  <tr>
+    <th>送料</th>
+    <td>800</td>
+  </tr>
+  <tr>
+    <th>商品合計</th>
+    <td><%= @total %></td>
+  </tr>
+  <tr>
+    <th>請求金額</th>
+    <td><%= @total+800 %></td>
+  </tr>
+</table>
+</div>
+<h4>支払方法</h4>
+
+<%= @order.payment_method== "credit_card" ? "クレジットカード" : "銀行振込" %> 
+
+<h4>お届け先</h4>
+<%= @address %>
+
+<!-- 「登録済み住所」が選択された場合 -->
+<% if @address.present? %>
+  <% @addresses.each do |address| %>
+    <%= address %>
+  <% end %>
+<% elsif @order.present? %>
+<!-- 「新しいお届け先」が選択された場合 -->
+  <%= @order.postal_code %>
+  <%= @order.address %> 
+  <%= @order.name %>
+<% end %>
+
+
+<%= f.submit "注文を確定する" %>
+<% end %>
