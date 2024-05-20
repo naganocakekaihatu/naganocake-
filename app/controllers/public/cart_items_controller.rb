@@ -1,6 +1,5 @@
 module Public
   class CartItemsController < ApplicationController
-    
       before_action :authenticate_customer!
   
       # カート商品一覧を表示
@@ -60,5 +59,6 @@ module Public
     def cart_item_params
       params.require(:cart_item).permit(:item_id, :amount, :customer_id)
     end
+  
   end
 end
