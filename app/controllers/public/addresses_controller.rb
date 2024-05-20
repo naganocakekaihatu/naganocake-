@@ -2,8 +2,7 @@ module Public
   class AddressesController < ApplicationController
     def index
       @address = Address.new
-      @addresses = Address.all
-      # 上ログインしている人のアドレス情報を入れる。メソッドcurrent_customer.addresses
+      @addresses = current_customer.addresses
     end
   
     def edit
@@ -12,7 +11,7 @@ module Public
   
     def create
        @address = Address.new(address_params)
-      # @address.customer_id = current_customer.id
+       @address.customer_id = current_customer.id
   	   @address.save
   	   redirect_to addresses_path
     end
