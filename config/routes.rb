@@ -30,10 +30,15 @@ Rails.application.routes.draw do
     resources :items
     resources :customers
     resources :cart_items
-    resources :orders
+    resources :orders, only: [:new, :index, :show, :create] do
+      get 'confirm', on: :collection
+      get 'thanks', on: :collection
+    end
+    post '/orders/confirm', to: 'orders#confirm', as: 'other_confirm_orders'
+    post '/orders/thanks', to: 'orders#thanks', as: 'order_thanks'
     resources :addresses, param: :id, only: [:index, :create, :edit, :updated, :destroy]
   end
-
+    
   namespace :admin do
     resources :items
     resources :genres
