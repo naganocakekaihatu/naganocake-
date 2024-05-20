@@ -1,2 +1,29 @@
-<h1>Customers#index</h1>
-<p>Find me in app/views/customers/index.html.erb</p>
+<h2>会員一覧</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>会員ID</th>
+      <th>氏名</th>
+      <th>メールアドレス</th>
+      <th>ステータス</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @customers.each do |customer| %>
+      <tr>
+        <td><%= customer.id %></td>
+        <td><%= link_to customer.family_name + customer.first_name, admin_customer_path(customer.id) %></td>
+        <td><%= customer.email %></td>
+        <td>
+          <% if customer.is_deleted == true %>
+            有効
+          <% else %>
+            退会
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
