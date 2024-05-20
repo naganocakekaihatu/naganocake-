@@ -1,2 +1,49 @@
-<h1>CartItems#index</h1>
-<p>Find me in app/views/cart_items/index.html.erb</p>
+
+<table class="table table-bordered">
+  <div class="mb-8 text-center">
+    <span class="text-3xl font-bold">
+      ショッピングカート
+    </span>
+  </div>
+  <thead>
+    <tr class="table-active">
+      <th>商品名</th>
+      <th>単価(税込み)</th>
+      <th>数量</th>
+      <th>小計</th>
+      <!--タグの中にbrタグを入れることで空白のセルを作れる-->
+      <th><br></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sum = 0 %>
+    <% @cart_items.each do |cart_item| %>
+      <tr>
+        <td>
+          <% if cart_item.item.image.attached? %>
+            <%= image_tag item.image, size:"100x100" %>
+          <% else %>
+            <%= image_tag "no-image", size:"100x100" %>
+          <% end %>
+          <%= cart_item.item.name %>
+        </td>
+        <td><%= cart_item.with_tax_price %></td>
+        <td>
+          <%= form_with model:cart_item, url:cart_item_path(cart_item.id) , local:true do |f| %>
+            <%= f.select :amount, *[1..10] %>
+            <%= f.submit "変更" , class: "btn btn-success" %>
+          <% end %>
+        </td>
+        <td><%= cart_item.subtotal %></td>
+        <td><%= link_to "削除", cart_item_path(cart_item.id) ,  method: :delete , "data-confirm" => "商品を削除しますか？" , class: "btn btn-danger"%></td>
+      </tr>
+      <% @sum += cart_item.subtotal %>
+    <% end %>
+  </table>
+
+<div>合計金額 <%= @sum %> 円</div>
+
+
+<%= link_to "買い物を続ける" , items_path , class: "btn btn-primary" %>
+
+<%= link_to "情報入力に進む" , new_order_path , class: "btn btn-success" %>

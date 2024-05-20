@@ -1,16 +1,33 @@
 Rails.application.routes.draw do
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  
-  devise_for :customers
-  
+
+
+
+  # 顧客用
+  # URL /customers/sign_in ...
+  devise_for :customers, skip: [:passwords], controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions'
+  }
+  devise_scope :customer do
+    get '/customers/sign_out' => 'public/sessions#destroy' #ログアウトできなくなったので追加
+  end
+  # 管理者用
+  # URL /admin/sign_in ...
+  devise_for :admin, skip: [:registrations, :passwords], controllers: {
+    sessions: "admin/sessions"
+  }
+  devise_scope :admin do
+    get '/admin/sign_out' => 'admin/sessions#destroy' #ログアウトできなくなったので追加
+  end
+
+
   root :to =>"public/homes#top"
+  get "/about" => "public/homes#about"
   get "/admin" => "admin/homes#top"
-  
+
   scope module: :public do
     resources :items
-    resources :registrations
-    resources :sessions
     resources :customers
     resources :cart_items
     resources :orders, only: [:new, :index, :show, :create] do
@@ -23,7 +40,6 @@ Rails.application.routes.draw do
   end
     
   namespace :admin do
-    resources :sessions
     resources :items
     resources :genres
     resources :customers
