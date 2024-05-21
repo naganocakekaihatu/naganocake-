@@ -4,17 +4,21 @@ ja:
       payment_method:
         credit_card: "クレジットカード"
         transfer: "銀行振込"
-        
+    errors:
+      messages:
+        not_saved: "エラーが発生したため、保存されませんでした。"
+
       order_status:
         wait_payment: "入金待ち"
         confirm_payment: "入金確認"
         making: "製作中"
         preparing_ship: "発送準備中"
         finish_prepare: "発送済み"
-        
+
     order_detail:
       manufacture_status:
         impossible_manufacture: "着手不可"
         waiting_manufacture: "製作待ち"
         manufacturing: "製作中"
         finish: "製作完了"
+

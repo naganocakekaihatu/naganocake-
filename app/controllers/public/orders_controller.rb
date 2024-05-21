@@ -3,31 +3,24 @@ module Public
     # before_action :authenticate_customer!
     def new
       @order = Order.new
+      @addresses = Address.all
     end
   
     def confirm
-      @order = Order.new(order_params)
-      if @order.valid?
-        case @order.number
-        when 1
-          # 「自身の住所」が選択された場合の処理
-          # 顧客の住所情報を取得し、表示するか別の処理を行う
-          @address = current_customer.address
-        when 2
-          # 「登録済み住所」が選択された場合の処理
-          # 顧客の住所一覧を取得し、表示するか別の処理を行う
-          @addresses = current_customer.addresses
-        when 3
-          # 「新しいお届け先」が選択された場合の処理
-          # 入力されたフォームデータを取得し、その他の処理を行う
-          @new_address = @order.address
-          @new_postal_code = @order.postal_code
-          @new_name = @order.name
-        end
-        redirect_to confi
-      end
-      # @cart_items = CartItem.where(customer_id: current_customer.id)
-      @total = 0
+        @order = Order.new(order_params)
+    if params[:order][:address_o].to_i == 0
+        @order.postal_code = current_customer.postal_code
+        @order.address = current_customer.address
+        @order.name = current_customer.family_name + current_customer.first_name
+    elsif params[:order][:address_o].to_i == 1
+        @address = Address.find(params[:order][:address_id])
+        @order.postal_code = @address.postal_code
+        @order.address = @address.address
+        @order.name = @address.name
+    elsif params[:order][:address_o].to_i == 2
+        @order.customer_id = current_customer.id
+    end
+        @cart_items = CartItem.where(customer_id: current_customer.id)
     end
     
     def thanks
@@ -102,7 +95,7 @@ module Public
     private
 
     def order_params
-      params.require(:order).permit(:payment_method, :postal_code, :address, :name)
+      params.require(:order).permit(:payment_method, :postal_code, :address, :name, :customer_id)
     end
   end
 end
