@@ -39,7 +39,7 @@
         <td><%= address.name %></td>
         <td>
             <%= link_to "編集する", edit_address_path(address),method: :get  %>　　
-            <%= link_to '削除する', address_path(address), method: :delete, data: {confirm: "削除しますか？"} %>
+            <%= link_to '削除する', address_path(address), method: :delete, data: { confirm: "削除しますか？" } %>
         </td>
     </tr>
 <% end %>
