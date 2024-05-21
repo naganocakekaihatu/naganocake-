@@ -27,7 +27,7 @@
   <div class="field">
     <%= f.label "(メイ)" %><%= f.text_field :first_name_kana %>
   </div>
-  
+
   <div class="field">
     <%= f.label "電話番号(ハイフンなし)" %>
     <%= f.text_field :telephone_number %>
@@ -53,3 +53,4 @@
   </div>
 
 <% end %>
+<%= link_to "退会する", customer_unsubscribe_path %>

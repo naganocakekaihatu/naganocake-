@@ -1,4 +1,5 @@
 module Public
+
   class CartItemsController < ApplicationController
       before_action :authenticate_customer!
   
@@ -61,4 +62,5 @@ module Public
     end
   
   end
+
 end

@@ -28,6 +28,9 @@ Rails.application.routes.draw do
 
   scope module: :public do
     resources :items
+    get '/customers/unsubscribe', to: 'customers#unsubscribe', as: 'customer_unsubscribe'
+    patch '/customers/withdraw', to: 'customers#withdraw', as: 'customer_withdraw'
+    get '/customers/withdraw' => 'customers#withdraw'
     resources :customers
     resources :cart_items
     resources :orders, only: [:new, :index, :show, :create] do
@@ -38,7 +41,7 @@ Rails.application.routes.draw do
     post '/orders/thanks', to: 'orders#thanks', as: 'order_thanks'
     resources :addresses, param: :id, only: [:index, :create, :edit, :update, :destroy]
   end
-    
+
   namespace :admin do
     resources :items
     resources :genres
