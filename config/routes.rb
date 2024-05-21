@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     end
     post '/orders/confirm', to: 'orders#confirm', as: 'other_confirm_orders'
     post '/orders/thanks', to: 'orders#thanks', as: 'order_thanks'
-    resources :addresses, param: :id, only: [:index, :create, :edit, :updated, :destroy]
+    resources :addresses, param: :id, only: [:index, :create, :edit, :update, :destroy]
   end
     
   namespace :admin do
