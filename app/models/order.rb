@@ -8,5 +8,5 @@ class Order < ApplicationRecord
   
   #注文ステータス
   enum order_status: {wait_payment: 0, confirm_payment: 1, making: 2, preparing_ship: 3, finish_prepare: 4}
-
+  
 end
