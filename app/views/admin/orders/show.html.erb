@@ -52,6 +52,12 @@
         <td><%= order_detail.item.price %></td>
         <td><%= order_detail.amount %></td>
         <td><%= order_detail.amount * order_detail.item.price %></td>
+        <td>
+          <%= form_with model: oder_detail, url: admin_order_details_path(order_detail), method: :patch do |f| %>
+            <%= f.select :making_status, options_from_collection_for_select(Order_detail.all, :id, :making_status) %>
+            <%= f.submit "更新" %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
