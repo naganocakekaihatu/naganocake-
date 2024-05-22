@@ -21,7 +21,7 @@
       <tr>
         <td>
           <% if cart_item.item.image.attached? %>
-            <%= image_tag item.image, size:"100x100" %>
+            <%= image_tag cart_item.item.image, size:"100x100" %>
           <% else %>
             <%= image_tag "no-image", size:"100x100" %>
           <% end %>
