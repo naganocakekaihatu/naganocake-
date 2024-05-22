@@ -18,7 +18,7 @@ module Public
         if my_cart_item.present?
           my_cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
           my_cart_item.amount += params[:cart_item][:amount].to_i
-          mycart_item.update(amount: cart_item.amount)
+          my_cart_item.update(amount: cart_item.amount)
           redirect_to cart_items_path
         else
           if cart_item.save
@@ -36,7 +36,7 @@ module Public
           @cart_item = CartItem.find(params[:id])
           #@cart.units += cart_params[:units].to_i
           @cart_item.update(cart_item_params)
-          redirect_to customers_cart_items_path
+          redirect_to cart_items_path
       end
 
       # カート商品を一つのみ削除
