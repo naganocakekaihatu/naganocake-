@@ -1,74 +1,78 @@
 <header>
-  <a href="/"><span>LOGO</span></a>
-        <ul>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"><span>LOGO</span></a>
+      <ul class="navbar-nav">
         <% if customer_signed_in? %>
-          <li>
-            <%= link_to customer_path(current_customer) do %>
+          <li class="nav-item">
+            <%= link_to customer_path(current_customer), class: "nav-link text-light" do %>
               マイページ
             <% end %>
           </li>
-          <li>
-            <%= link_to items_path do %>
+          <li class="nav-item">
+            <%= link_to items_path, class: "nav-link text-light" do %>
               商品一覧
             <% end %>
           </li>
-          <li>
-            <%= link_to cart_items_path do %>
+          <li class="nav-item">
+            <%= link_to cart_items_path, class: "nav-link text-light" do %>
               カート
             <% end %>
           </li>
-          <li>
-            <%= link_to destroy_customer_session_path, method: :delete do %>
+          <li class="nav-item">
+            <%= link_to destroy_customer_session_path, method: :delete, class: "nav-link text-light" do %>
               ログアウト
             <% end %>
           </li>
         <% elsif admin_signed_in? %>
-          <li>
-            <%= link_to admin_items_path do %>
+          <li class="nav-item">
+            <%= link_to admin_items_path, class: "nav-link text-light" do %>
               商品一覧
             <% end %>
           </li>
-          <li>
-            <%= link_to admin_customers_path do %>
+          <li class="nav-item">
+            <%= link_to admin_customers_path, class: "nav-link text-light" do %>
               会員一覧
             <% end %>
           </li>
-          <li>
-            <%= link_to admin_path(current_admin) do %>
+          <li class="nav-item">
+            <%= link_to admin_path(current_admin), class: "nav-link text-light" do %>
               注文履歴一覧
             <% end %>
           </li>
-          <li>
-            <%= link_to admin_genres_path do %>
+          <li class="nav-item">
+            <%= link_to admin_genres_path, class: "nav-link text-light" do %>
               ジャンル履歴一覧
             <% end %>
           </li>
-          <li>
-            <%= link_to destroy_admin_session_path, method: :delete do %>
+          <li class="nav-item">
+            <%= link_to destroy_admin_session_path, method: :delete, class: "nav-link text-light" do %>
               ログアウト
             <% end %>
           </li>
         <% else %>
-          <li>
-            <%= link_to about_path do %>
+          <li class="nav-item">
+            <%= link_to about_path, class: "nav-link text-light" do %>
               About
             <% end %>
           </li>
-          <li>
-            <%= link_to items_path do %>
+          <li class="nav-item">
+            <%= link_to items_path, class: "nav-link text-light" do %>
               商品一覧
             <% end %>
           </li>
-          <li>
-            <%= link_to new_customer_registration_path do %>
+          <li class="nav-item">
+            <%= link_to new_customer_registration_path, class: "nav-link text-light" do %>
               新規登録
             <% end %>
           </li>
-          <li>
-            <%= link_to new_customer_session_path do %>
+          <li class="nav-item">
+            <%= link_to new_customer_session_path, class: "nav-link text-light" do %>
               ログイン
             <% end %>
           </li>
         <% end %>
-        </ul>
+      </ul>
+    </div>
+  </nav>
 </header>
