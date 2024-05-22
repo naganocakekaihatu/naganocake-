@@ -1,7 +1,7 @@
 # module Admin　←モデル名Adminが存在し、名前がブッキングしてエラーになるのでコメントアウトしてます
   class Admin::CustomersController < ApplicationController
     def index
-      @customers = Customer.all
+      @customers = Customer.page(params[:page])
     end
 
     def show
