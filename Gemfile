@@ -59,3 +59,4 @@ gem "devise"
 
 gem "enum_help"
 gem 'kaminari','~> 1.2.1'
+gem 'bootstrap', '~> 4.6', '>= 4.6.0'
