@@ -13,3 +13,6 @@
  *= require_tree .
  *= require_self
  */
+.custom-bg-color {
+  background-color: #FF0000; /* 好みの色に変えてください */
+}
