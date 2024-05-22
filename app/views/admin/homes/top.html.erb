@@ -11,5 +11,15 @@
   </thead>
 
   <tbody>
-  <!--orderが出来上がったら記述-->
+    <% @orders.each do |oder| %>
+      <tr>
+        <td><%= link_to order.created_at.strftime("%Y/%m/%d %H:%M"), admin_order_path(oder.id) %></td>
+        <td><%= order.customer.last_name + order.customer.first_name %></td>
+        <td><%= order.customer.email %></td>
+        <td>
+          <%= oder.satus %>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
+</table>
