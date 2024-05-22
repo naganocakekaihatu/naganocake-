@@ -2,25 +2,33 @@ module Public
   class OrdersController < ApplicationController
     # before_action :authenticate_customer!
     def new
-      @order = Order.new
-      @addresses = Address.all
+        @order = Order.new
     end
   
     def confirm
-        @order = Order.new(order_params)
-    if params[:order][:address_o].to_i == 0
-        @order.postal_code = current_customer.postal_code
-        @order.address = current_customer.address
-        @order.name = current_customer.family_name + current_customer.first_name
-    elsif params[:order][:address_o].to_i == 1
-        @address = Address.find(params[:order][:address_id])
-        @order.postal_code = @address.postal_code
-        @order.address = @address.address
-        @order.name = @address.name
-    elsif params[:order][:address_o].to_i == 2
-        @order.customer_id = current_customer.id
-    end
+      if request.get?  # GETリクエストが来た場合（ページリロード時）
+          redirect_to new_order_path
+      else  # POSTリクエストが来た場合
+          @order = Order.new(order_params)
+      if params[:order][:address_o].present? && params[:order][:address_o].to_i == 0 
+          @order.postal_code = current_customer.postal_code
+          @order.address = current_customer.address
+          @order.name = current_customer.family_name + current_customer.first_name
+      elsif params[:order][:address_o].present? && params[:order][:address_o].to_i == 1
+          @address = Address.find(params[:order][:address_id])
+          @order.postal_code = @address.postal_code
+          @order.address = @address.address
+          @order.name = @address.name
+      elsif params[:order][:address_o].to_i == 2 && @order.postal_code.present? && @order.address.present? && @order.name.present?
+          @order.customer_id = current_customer.id
+      else
+          return redirect_to new_order_path if @order.blank?
+          session[:order] = nil
+          render :new  
+      end
+         
         @cart_items = CartItem.where(customer_id: current_customer.id)
+      end
     end
     
     def thanks
@@ -64,6 +72,7 @@ module Public
       end
       
       if @order.save
+
         if @order.status == 0
           @cart_items.each do |cart_item|
             OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.price, quantity: cart_item.quantity, making_status: 0)
@@ -94,8 +103,8 @@ module Public
     
     private
 
-    def order_params
-      params.require(:order).permit(:payment_method, :postal_code, :address, :name, :customer_id)
-    end
+   def order_params
+      params.require(:order).permit(:payment_method, :postal_code, :address, :name)
+   end
   end
 end
