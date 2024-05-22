@@ -59,7 +59,7 @@
       </tr>
       <tr>
         <th>請求金額</th>
-        <td><%= @total ? @total + 800 : 0 %></td>
+        <td><%= @total + 800 %></td>
       </tr>
     </table>
 </div>
@@ -76,16 +76,16 @@
 
 <h4>お届け先</h4>
 郵便番号
-<p><%= @order.postal_code %></P>
+<p><%= @order_postal_code %></P>
 住所
-<p><%= @order.address %></p>
+<p><%= @order_address %></p>
 宛先
-<p><%= @order.name %></p>
+<p><%= @order_name %></p>
 
 <%= form_with model: @order do |f| %>
-　<%= hidden_field_tag :postal_code, @order.postal_code %>
-  <%= hidden_field_tag :address, @order.address %>
-  <%= hidden_field_tag :name, @order.name %>
-  
+  <%= f.hidden_field :postal_code, value: @order_postal_code %>
+  <%= f.hidden_field :address, value: @order_address %>
+  <%= f.hidden_field :name, value: @order_name %>
+  <%= f.hidden_field :payment_method, value: @order.payment_method %>
   <%= f.submit "注文を確定する" %>
 <% end %>
