@@ -20,7 +20,7 @@
         <th>小計</th>
       </tr>
        <% @total = 0 %>
-       <%= @cart_items.each do |cart_item| %>
+      <% @cart_items.each do |cart_item| %>
         <tr>
           <td>
             <%= image_tag(item.image, size: "100x100") %>
@@ -59,7 +59,14 @@
 </div>
 <h4>支払方法</h4>
 
-<%= @order.payment_method== "credit_card" ? "クレジットカード" : "銀行振込" %> 
+<% if params[:order][:address_o].present? %>
+  <% if @order.payment_method == "credit_card" %>
+    クレジットカード
+  <% else %>
+    銀行振込
+  <% end %>
+<% end %>
+
 
 <h4>お届け先</h4>
 郵便番号

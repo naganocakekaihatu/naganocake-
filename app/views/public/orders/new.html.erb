@@ -1,10 +1,11 @@
 <h1>注文情報入力画面</h1>
 
-<%= form_with model: @order, url: confirm_orders_path, local: true do |f| %>
+<%= form_with model: @order, url: confirm_orders_path, method: :post do |f| %>
+
     <h2>支払い方法</h2>
    
    <div>
-     <%= f.radio_button :payment_method, "credit_card" %>
+     <%= f.radio_button :payment_method, "credit_card", :checked => true  %>
      <%= f.label :payment_method, "クレジットカード" %>
      <br>
      <%= f.radio_button :payment_method, "transfer" %>
@@ -12,13 +13,13 @@
    </div>
    
     <h2>配送先</h2>
-     <p><%= f.radio_button :address_o, 0 %>自身の住所</p>
+     <p><%= f.radio_button :address_o, 0, :checked => true  %>自身の住所</p>
           <p><%= current_customer.postal_code %></p>
           <p><%= current_customer.address %></p>
       
       <h2>登録済み住所</h2>
      <p> <%= f.radio_button :address_o, 1 %>登録済み住所</p>
-     <p><%= f.collection_select :address_id, Address.all, :id, :address %></p>
+     <p><%= f.collection_select :address_id,  current_customer.addresses, :id, :address %></p>
           
      <h2>新しいお届け先</h2>
       <p> <%= f.radio_button :address_o, 2 %>新しいお届け先</p>
