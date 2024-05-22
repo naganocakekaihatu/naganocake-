@@ -82,6 +82,10 @@
 宛先
 <p><%= @order.name %></p>
 
-<%= form_for  @order,url: '/orders/thanks'  do |f| %>
-<%= f.submit "注文を確定する" %>
+<%= form_with model: @order do |f| %>
+　<%= hidden_field_tag :postal_code, @order.postal_code %>
+  <%= hidden_field_tag :address, @order.address %>
+  <%= hidden_field_tag :name, @order.name %>
+  
+  <%= f.submit "注文を確定する" %>
 <% end %>
