@@ -35,9 +35,35 @@ module Public
     end
   
     def create
-        @order = Order.new(order_params)
+      @order = Order.new
+      @order.customer_id = current_customer.id
+      order_shipping_fee = 800
+      @cart_items = CartItem.where(customer_id: current_customer.id)
+      ary = []
+      @cart_items.each do |cart_item|
+        ary << cart_item.item.price*cart_item.amount
+      end
+      @cart_items_price = ary.sum
+      @order.total_payment = order_shipping_fee + @cart_items_price
+      if @order.payment_method == "credit_card"
+        @order.status = 1
+      else
+        @order.status = 0
+      end
+      
       if @order.save
-        redirect_to  thanks_orders_path
+
+        if @order.status == 0
+          @cart_items.each do |cart_item|
+            OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.price, amount: cart_item.amount, making_status: 0)
+          end
+        else
+          @cart_items.each do |cart_item|
+            OrderDetail.create!(order_id: @order.id, item_id: cart_item.item.id, price: cart_item.item.price, amount: cart_item.amount, making_status: 1)
+          end
+        end
+        @cart_items.destroy_all
+        redirect_to thanks_orders_path
       else
         render :new
       end
