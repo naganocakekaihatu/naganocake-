@@ -22,13 +22,13 @@
     <tr>
       <td><%= order.created_at.strftime("%Y/%m/%d %H:%M") %></td>
       <td><%= order.customer.family_name %><%= order.customer.first_name %></td>
-      <td><%= order.sum(:cart_item.amount) %></td>
+      <td><%= order.cart_items.sum(:quantity) %></td>
       <td>
         <%= form_with model: order, url: admin_order_path(order), method: :patch do |f| %>
         <%= f.select :order_status, Order.order_statuses, class: "form-control" %>
         <!--%= f.submit "更新", class: "btn btn-primary" %>-->
         <% end %>
-      
+
         <td><%= order.total_fee %></td>
         <td><%= order.order_status %></td>
         <td><%= link_to "注文詳細", public_order_path(order) %></td>
