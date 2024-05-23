@@ -1,26 +1,33 @@
-<h1>商品詳細</h1>
-<p><%= link_to "商品一覧へ", items_path %></p>
-<p>
-  <% if @item.image.attached? %>
-    <%= image_tag @item.image, size:"200x200" %>
-  <% else %>
-    <%= image_tag "no-image", size:"200x200" %>
-  <% end %>  
-</p>
-<p><%= @item.genre.name %></p>
-<p><%= @item.name %></p>
-<p><%= @item.price %>円</p>
-<% if @item.is_active %>
-  <p>販売中</p>
-<% else %>
-  <p>販売停止</p>
-<% end %>
-</p>
-<p><%= @item.introduction %></p>
+<div class="container text-center">
+  <h1 class="mt-4">商品詳細</h1>
+  <p><%= link_to "商品一覧へ", items_path %></p>
+  <div class="row">
+    <div class="col">
+      <% if @item.image.attached? %>
+        <%= image_tag @item.image, size:"200x200", class: "img-fluid" %>
+      <% else %>
+        <%= image_tag "no-image", size:"200x200", class: "img-fluid" %>
+      <% end %>
+    </div>
 
+    <div class="col">
+      <p class="mt-4"><%= @item.genre.name %></p>
+      <p><%= @item.name %></p>
+      <p><%= @item.price %>円</p>
+      <% if @item.is_active %>
+        <p>販売中</p>
+      <% else %>
+        <p>販売停止</p>
+      <% end %>
+      <p><%= @item.introduction %></p>
 
-<%= form_with model:@cart_item_new, local:true do |f| %>
-　<%= f.hidden_field :item_id, value: @item.id %>
-  <%= f.select :amount, *[1..10] %>
-  <%= f.submit 'カートに追加' ,class: 'btn btn-primary' %>
-<% end %>
+      <%= form_with model:@cart_item_new, local:true do |f| %>
+        <%= f.hidden_field :item_id, value: @item.id %>
+        <div class="form-group">
+          <%= f.select :amount, (1..10), class: "form-control" %>
+        </div>
+        <%= f.submit 'カートに追加', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

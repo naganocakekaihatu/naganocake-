@@ -1,40 +1,58 @@
-<h1>注文情報入力画面</h1>
+<h1 class="display-4">注文情報入力</h1>
+
+<% if @order.errors.any? %>
+  <%= @order.errors.count %>件のエラーが発生しました。
+  <ul>
+    <% @order.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= form_with model: @order, url: confirm_orders_path, method: :post do |f| %>
-
-  <h2>支払い方法</h2>
-   
   <div>
-   <%= f.radio_button :payment_method, "credit_card", :checked => true  %>
-   <%= f.label :payment_method, "クレジットカード" %>
-   <br>
-   <%= f.radio_button :payment_method, "transfer" %>
-   <%= f.label :payment_method, "銀行振込" %>
+    <h2>支払い方法</h2>
+    <%= f.radio_button :payment_method, "credit_card", :checked => true  %>
+    <%= f.label :payment_method, "クレジットカード" %><br>
+    
+    <%= f.radio_button :payment_method, "transfer" %>
+    <%= f.label :payment_method, "銀行振込" %>
   </div>
-   
-  <h2>配送先</h2>
-  <p><%= f.radio_button :address_o, 0, :checked => true  %>自身の住所</p>
-       <p><%= current_customer.postal_code %></p>
-       <p><%= current_customer.address %></p>
-   
-  <p> <%= f.radio_button :address_o, 1 %>登録済み住所</p>
-  <p><%= f.collection_select :address_id,  current_customer.addresses, :id, :address %></p>
-       
-  <p> <%= f.radio_button :address_o, 2 %>新しいお届け先</p>
-  
-  <table>
-    <tr>
-      <td>郵便番号</td>
-      <td> <%= f.text_field :postal_code %></td>
-    </tr>
-    <tr>
-      <td>住所</td>
-      <td><%= f.text_field :address %></td>
-    </tr>
-    <tr>
-      <td>宛名</td>
-      <td><%= f.text_field :name %></td>
-    </tr>
-  </table>
+     
+  <div>
+    
+    <h2>配送先</h2>
+    <div class="mb-3">
+      <div><strong><%= f.radio_button :address_o, 0, :checked => true %>自身の住所</strong></div>
+      <span><%= current_customer.postal_code %></span>
+      <span><%= current_customer.address %></span>
+    </div>
+    
+    <% if current_customer.addresses.present? %>
+      <div class="mb-3">
+        <div><strong><%= f.radio_button :address_o, 1 %>登録済み住所</strong></div>
+        <span><%= f.collection_select :address_id, current_customer.addresses, :id, :address %></span>
+      </div>
+    <% end %>
+    
+    <div class="mb-3">
+      <div></div><strong><%= f.radio_button :address_o, 2 %>新しいお届け先</strong></div>
+      <table>
+        <tr>
+          <td>郵便番号</td>
+          <td> <%= f.text_field :postal_code %></td>
+        </tr>
+        <tr>
+          <td>住所</td>
+          <td><%= f.text_field :address %></td>
+        </tr>
+        <tr>
+          <td>宛名</td>
+          <td><%= f.text_field :name %></td>
+        </tr>
+      </table>
+    </div>
   <%= f.submit "確認画面へ進む" %>
+  </div>
+
 <% end %>
