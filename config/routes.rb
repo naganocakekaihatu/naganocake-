@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     resources :items
     resources :genres
     resources :customers
-    resources :orders
+    resources :orders, only: [:show, :update]
     patch '/orders/:order_id/order_details/:id', to: 'order_details#update', as: 'order_details'
   end
 

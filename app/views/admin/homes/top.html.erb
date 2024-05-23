@@ -17,7 +17,7 @@
         <td><%= order.customer.family_name + order.customer.first_name %></td>
         <td><%= order.order_details.sum(:amount) %></td>
         <td>
-          <%= order.status %>
+          <%= I18n.t("enums.order.status.#{order.status}") %>
         </td>
       </tr>
     <% end %>
