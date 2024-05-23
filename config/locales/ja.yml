@@ -16,7 +16,7 @@ ja:
         finish_prepare: "発送済み"
 
     order_detail:
-      manufacture_status:
+      making_status:
         impossible_manufacture: "着手不可"
         waiting_manufacture: "製作待ち"
         manufacturing: "製作中"
@@ -39,7 +39,7 @@ ja:
     - 金
     - 土
     abbr_month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月
@@ -65,7 +65,7 @@ ja:
       long: "%Y年%m月%d日(%a)"
       short: "%m/%d"
     month_names:
-    - 
+    -
     - 1月
     - 2月
     - 3月

@@ -4,18 +4,18 @@
 
   <div class="d-flex m-2 text-left">
     <div class="w-25 text-left">購入者</div>
-    <div class="w-25 text-left"><%= link_to @order.customer.family_name + @order.customer.first_name, admin_customer_path(@oder.id) %></div>
+    <div class="w-25 text-left"><%= link_to @order.customer.family_name + @order.customer.first_name, admin_customer_path(@order.id) %></div>
   </div>
 
   <div class="d-flex m-2 text-left">
     <div class="w-25 text-left">注文日</div>
-    <div class="w-25 text-left"><%= link_to @order.created_at.strftime("%Y/%m/%d %H:%M") %></div>
+    <div class="w-25 text-left"><%= @order.created_at.strftime("%Y/%m/%d %H:%M") %></div>
   </div>
 
   <div class="d-flex m-2 text-left">
     <div class="w-25 text-left">配送先</div>
-    <div class="w-25 text-left"><%= @order.adress.postal_code + @order.adress.adress %></div>
-    <div class="w-25 text-left"><%= @order.adress.name %></div>
+    <div class="w-25 text-left"><%= @order.postal_code%><%= @order.address %></div>
+    <div class="w-25 text-left"><%= @order.name %></div>
   </div>
 
   <div class="d-flex m-2 text-left">
@@ -26,9 +26,9 @@
   <div class="d-flex m-2 text-left">
     <div class="w-25 text-left">注文ステータス</div>
     <div class="w-25 text-left">
-      <%= form_with model: @oder, url: admin_order_path(@order), method: :patch do |f| %>
-        <%= f.select :order_status, options_from_collection_for_select(Order.all, :id, :status) %>
-        <%= f.submit "更新" %>
+      <%= form_with model: @order, url:admin_order_path(@order), method: :patch do |f| %>
+        <%= f.select :status, Order.order_statuses.keys.to_a %>
+        <%= f.submit "更新", class: "btn btn-success" %>
       <% end %>
     </div>
   </div>
@@ -53,9 +53,9 @@
         <td><%= order_detail.amount %></td>
         <td><%= order_detail.amount * order_detail.item.price %></td>
         <td>
-          <%= form_with model: oder_detail, url: admin_order_details_path(order_detail), method: :patch do |f| %>
-            <%= f.select :making_status, options_from_collection_for_select(Order_detail.all, :id, :making_status) %>
-            <%= f.submit "更新" %>
+          <%= form_with model: @order_detail, url:admin_order_details_path(order_detail), method: :patch do |f| %>
+              <%= f.select :making_status, OrderDetail.making_statuses.keys.to_a %>
+              <%= f.submit '更新',class:"btn btn-success" %>
           <% end %>
         </td>
       </tr>

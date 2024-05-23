@@ -6,15 +6,15 @@
 
     def show
       @order = Order.find(params[:id])
-      @order_details= OrderDetail.where(order_id: @order.id)
-      # @order_items = @order.order_items
+      # @order_details= OrderDetail.where(order_id: @order.id)
+      @order_details = @order.order_details
     end
 
     def update
       order = Order.find(params[:id])
       order.update(order_params)
       flash[:notice] = "注文ステータスを更新しました。"
-      redirect_to admin_order_path(oder.id)
+      redirect_to admin_order_path(order.id)
     end
 
   end
