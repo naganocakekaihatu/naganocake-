@@ -4,7 +4,8 @@ class Admin::OrderDetailsController < ApplicationController
   def update
    order_detail = OrderDetail.find(params[:id])
    order_detail.update(order_detail_params)
-   redirect_to admin_order_path(order_detail.order)
+   flash[:notice] = "制作ステータスを更新しました。"
+   redirect_to request.referer
   end
 
 
