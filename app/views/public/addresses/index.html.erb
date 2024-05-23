@@ -1,47 +1,45 @@
-<h1>配送先登録・一覧ページ</h1>
-  <%= form_for @address, url:addresses_path, method: :post do |f| %>
-      <div>
-        <%= f.label :郵便番号 %>
-      </div>
-      <div>
-        <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code" %>
-      </div>
-      <div>
-        <%= f.label :住所 %>
-      </div>
-      <div>
-        <%= f.text_field :address, autofocus: true, autocomplete: "address"%>
-      </div>
-      <div>
-        <%= f.label :宛名 %>
-      </div>
-      <div>
-        <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-      </div>
-      <div>
-      <%= f.submit "登録する", class:"btn btn-primary" %>
-      </div>
-  <% end %>
-  
-  <h1>登録情報</h1>
-  
-<table>
+<h1 class="text-center">配送先登録・一覧ページ</h1>
+<%= form_for @address, url: addresses_path, method: :post do |f| %>
+  <div class="form-group">
+    <%= f.label :postal_code, "郵便番号" %>
+    <%= f.text_field :postal_code, class: "form-control", autofocus: true, autocomplete: "postal_code" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :address, "住所" %>
+    <%= f.text_field :address, class: "form-control", autofocus: true, autocomplete: "address" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :name, "宛名" %>
+    <%= f.text_field :name, class: "form-control", autofocus: true, autocomplete: "name" %>
+  </div>
+  <div class="text-center">
+    <%= f.submit "登録する", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<h1 class="text-center mt-4">登録情報</h1>
+
+<table class="table mt-4">
+  <thead>
     <tr>
-        <th>郵便番号</th>
-        <th>住所</th>
-        <th>宛名</th>
-        <th></th>
+      <th scope="col">郵便番号</th>
+      <th scope="col">住所</th>
+      <th scope="col">宛名</th>
+      <th scope="col"></th>
     </tr>
+  </thead>
+  <tbody>
     <% @addresses.each do |address| %>
-    <tr>
+      <tr>
         <td><%= address.postal_code %></td>
         <td><%= address.address %></td>
         <td><%= address.name %></td>
         <td>
-            <%= link_to "編集する", edit_address_path(address),method: :get  %>　　
-            <%= link_to '削除する', address_path(address), method: :delete, data: { confirm: "削除しますか？" } %>
+          <%= link_to "編集する", edit_address_path(address), method: :get, class: "btn btn-info" %>
+          <%= link_to '削除する', address_path(address), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger" %>
         </td>
-    </tr>
-<% end %>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
-<p>Find me in app/views/addresses/index.html.erb</p>
+<p class="text-center">Find me in app/views/addresses/index.html.erb</p>
