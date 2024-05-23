@@ -10,15 +10,15 @@
       </tr>
       <tr>
         <td>配送先</td>
-        <td>〒<%= @order.post_code + "　" + @order.address + "　" + @order.name %></td>
+        <td><%= @order.address_display %></td>
       </tr>
       <tr>
         <td>支払い方法</td>
-        <td><%= @order.pay_method_i18n %></td>
+        <td><%= @payment_method %></td>
       </tr>
       <tr>
         <td>ステータス</td>
-        <td><%= @order.status_i18n %></td>
+        <td><%= @status %></td>
       </tr>
     </table>
 
@@ -26,15 +26,15 @@
     <table class="table table-striped">
       <tr>
         <td>商品合計</td>
-        <td><%= @order.total_price %></td>
+        <td><%= @order.total_payment - @order.shipping_cost %></td>
       </tr>
       <tr>
         <td>配送料</td>
-        <td><%= @order.shipping_fee %></td>
+        <td><%= @order.shipping_cost %></td>
       </tr>
       <tr>
         <td>ご請求額</td>
-        <td><%= @order.total_price + @order.shipping_fee %></td>
+        <td><%= @order.total_payment %></td>
       </tr>
     </table>
 
@@ -49,9 +49,9 @@
       <% @order_details.each do |order_detail| %>
         <tr>
           <td><%= order_detail.item.name %></td>
-          <td><%= order_detail.item.price %></td>
-          <td><%= order_detail.quantity %></td>
-          <td><%= order_detail.quantity * order_detail.item.price %></td>
+          <td><%= (order_detail.item.price * 1.1).floor %></td>
+          <td><%= order_detail.amount %></td>
+          <td><%= (order_detail.amount * (order_detail.item.price * 1.1)).floor %></td>
         </tr>
       <% end %>
     </table>
