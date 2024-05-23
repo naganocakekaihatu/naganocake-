@@ -11,10 +11,11 @@ module Public
       else  # POSTリクエストが来た場合
           @order = Order.new(order_params)
       if params[:order][:address_o].present? && params[:order][:address_o].to_i == 0 
+
           @order_postal_code = current_customer.postal_code
           @order_address = current_customer.address
           @order_name = current_customer.family_name + current_customer.first_name
-      elsif params[:order][:address_o].present? && params[:order][:address_o].to_i == 1
+      elsif params[:order][:address_o].present? && params[:order][:address_o].to_i
           @address = Address.find(params[:order][:address_id])
           @order_postal_code = @address.postal_code
           @order_address = @address.address
