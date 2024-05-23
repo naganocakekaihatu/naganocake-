@@ -25,15 +25,10 @@
       <td><%= OrderDetail.where(order_id: order.id).sum(:amount) %></td>
       <td><%= order.total_payment %></td>
       <td>
-        <%= form_with model: order, url: admin_order_path(order), method: :patch do |f| %>
-        <%= f.select :status, Order.statuses, class: "form-control" %>
-        <!--%= f.submit "更新", class: "btn btn-primary" %>-->
-        <% end %>
+        <%= I18n.t("enums.order.status.#{order.status}") %>
       </td>
       <td><%= link_to "注文詳細", order_path(order) %></td>
     </tr>
   <% end %>
  </tbody>
 </table>
-<h1>注文確定処理（注文）</h1>
-<p>Find me in app/views/orders/index.html.erb</p>
