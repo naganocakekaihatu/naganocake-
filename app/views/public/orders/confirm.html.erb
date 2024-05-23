@@ -1,34 +1,22 @@
-<h1>注文情報確認画面</h1>
-<style media="screen">
-  table {
-    border-collapse: collapse;
-  }
+<h1 class="display-4">注文情報確認</h1>
 
-  th,
-  td {
-    border: 1px #333 solid;
-    padding: 8px;
-  }
-</style>
-<div style="display: flex; flex-direction: row;">
-  <table style="margin-right: 10px;">
-      <!--横に表示-->
+<div class="row">
+  <div class="col-md-6">
+    <table class="table">
       <tr>
         <th>商品名</th>
         <th>単価(税込)</th>
         <th>数量</th>
         <th>小計</th>
       </tr>
-       <% @total = 0 %>
-
-       <% @cart_items.each do |cart_item| %>
-
+      <% @total = 0 %>
+      <% @cart_items.each do |cart_item| %>
         <tr>
           <td>
             <% if cart_item.item.image.attached? %>
-              <%= image_tag cart_item.item.image, size:"100x100" %>
+              <%= image_tag cart_item.item.image, size: "100x100" %>
             <% else %>
-              <%= image_tag "no-image", size:"100x100" %>
+              <%= image_tag "no-image", size: "100x100" %>
             <% end %>  
             <%= cart_item.item.name %>
           </td>
@@ -38,7 +26,7 @@
           <td>
             <%= cart_item.amount %>
           </td>
-            <% sub_total = cart_item.with_tax_price * cart_item.amount %>
+          <% sub_total = cart_item.with_tax_price * cart_item.amount %>
           <td>
             <%= sub_total %>
           </td>
@@ -46,9 +34,10 @@
         </tr>
       <% end %>
     </table>
-    
-    <table>
-    
+  </div>
+
+  <div class="col-md-6">
+    <table class="table">
       <tr>
         <th>送料</th>
         <td>800</td>
@@ -62,7 +51,9 @@
         <td><%= @total + 800 %></td>
       </tr>
     </table>
+  </div>
 </div>
+
 <h4>支払方法</h4>
 
 <% if params[:order][:address_o].present? %>
@@ -75,12 +66,11 @@
 
 
 <h4>お届け先</h4>
-郵便番号
-<p><%= @order_postal_code %></P>
-住所
-<p><%= @order_address %></p>
-宛先
-<p><%= @order_name %></p>
+
+<p>郵便番号: <%= @order.postal_code %></p>
+<p>住所: <%= @order.address %></p>
+<p>宛先: <%= @order.name %></p>
+
 
 <%= form_with model: @order do |f| %>
   <%= f.hidden_field :postal_code, value: @order_postal_code %>

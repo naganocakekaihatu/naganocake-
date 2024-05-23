@@ -1,4 +1,4 @@
-<h1>注文情報入力画面</h1>
+<h1 class="display-4">注文情報入力</h1>
 
 <% if @order.errors.any? %>
   <%= @order.errors.count %>件のエラーが発生しました。
@@ -54,4 +54,5 @@
     </div>
   <%= f.submit "確認画面へ進む" %>
   </div>
+
 <% end %>
