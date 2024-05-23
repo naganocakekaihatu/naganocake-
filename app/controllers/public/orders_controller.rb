@@ -15,7 +15,7 @@ module Public
           @order_postal_code = current_customer.postal_code
           @order_address = current_customer.address
           @order_name = current_customer.family_name + current_customer.first_name
-      elsif params[:order][:address_o].present? && params[:order][:address_o].to_i
+      elsif params[:order][:address_o].present? && params[:order][:address_o].to_i == 1
           @address = Address.find(params[:order][:address_id])
           @order_postal_code = @address.postal_code
           @order_address = @address.address
