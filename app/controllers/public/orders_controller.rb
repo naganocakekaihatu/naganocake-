@@ -4,13 +4,13 @@ module Public
     def new
         @order = Order.new
     end
-  
+
     def confirm
       if request.get?  # GETリクエストが来た場合（ページリロード時）
           redirect_to new_order_path
       else  # POSTリクエストが来た場合
           @order = Order.new(order_params)
-      if params[:order][:address_o].present? && params[:order][:address_o].to_i == 0 
+      if params[:order][:address_o].present? && params[:order][:address_o].to_i == 0
 
           @order_postal_code = current_customer.postal_code
           @order_address = current_customer.address
@@ -30,14 +30,14 @@ module Public
           session[:order] = nil
           render :new
       end
-         
+
         @cart_items = CartItem.where(customer_id: current_customer.id)
       end
     end
-    
+
     def thanks
     end
-  
+
     def create
       @order = Order.new(order_params)
       @order.customer_id = current_customer.id
@@ -60,11 +60,11 @@ module Public
         render :new
       end
     end
-  
+
     def index
       @orders = current_customer.orders
     end
-  
+
     def show
       # orderの特定
       @order = Order.find(params[:id])
@@ -72,13 +72,13 @@ module Public
       @shipping_fee = 800
       # 計算
       @total = 0
-      
+
       if @order.payment_method.to_i == 0
         @payment_method = "クレジット"
       elsif @order.payment_method.to_i == 1
         @payment_method = "銀行振込"
       end
-      
+
       case @order.status.to_i
       when 0
         @status = "入金待ち"
@@ -92,12 +92,12 @@ module Public
         @status = "発送済み"
       end
     end
-    
+
     private
 
     def order_params
       params.require(:order).permit(:payment_method, :shipping_cost, :total_payment, :status, :postal_code, :address, :name)
     end
-    
+
   end
 end
