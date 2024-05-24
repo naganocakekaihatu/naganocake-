@@ -1,18 +1,13 @@
-<div style="text-align: center;">
-  <div class="mt-3">
-    <%= flash[:alert] %>
-  </div>
+<h1>商品一覧</h1>
 
-  <h1>商品一覧</h1>
-
-  <table style="margin: 0 auto;">
-    <tr>
+<table style="margin: 0 auto;">
+  <tr>
     <% @items.each do |item| %>
       <td>
         <% if item.image.attached? %>
-          <%= image_tag item.image, size:"100x100" %>
+          <%= link_to image_tag(item.image, size: "100x100"), item_path(item) %>
         <% else %>
-          <%= image_tag "no-image", size:"100x100" %>
+          <%= link_to image_tag("no-image", size: "100x100"), item_path(item) %>
         <% end %>
         <br>
         <%= link_to item.name, item_path(item) %>
@@ -20,21 +15,20 @@
         <%= item.price %>円
         <br>
         <% if item.is_active %>
-          &lt;販売中&gt;
+          <span>販売中</span>
         <% else %>
-          &lt;販売停止&gt;
+          <span>販売停止</span>
         <% end %>
         <br>
-        <%= form_with model: @cart_item_new, local: true do |f| %>
+        <%= form_with(model: @cart_item_new, local: true) do |f| %>
           <%= f.hidden_field :item_id, value: item.id %>
-          <%= f.select :amount, *[1..10] %>
+          <%= f.select :amount, (1..10).to_a %>
           <%= f.submit 'カートに追加', class: 'btn btn-primary' %>
         <% end %>
       </td>
     <% end %>
-    </tr>
-  </table>
-</div>
+  </tr>
+</table>
 
 <div style="text-align: center;">
   <div class="pagination" style="display: inline-block; margin-top: 10px;">

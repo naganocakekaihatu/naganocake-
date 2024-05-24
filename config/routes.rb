@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     get '/customers/unsubscribe', to: 'customers#unsubscribe', as: 'customer_unsubscribe'
     patch '/customers/withdraw', to: 'customers#withdraw', as: 'customer_withdraw'
     get '/customers/withdraw' => 'customers#withdraw'
+    delete '/cart_items/destroy_all', to: 'cart_items#destroy_all', as: :cart_items_destroy_all
     resources :customers
     resources :cart_items
     resources :orders, only: [:new, :index, :show, :create] do
@@ -46,7 +47,7 @@ Rails.application.routes.draw do
     resources :items
     resources :genres
     resources :customers
-    resources :orders
+    resources :orders, only: [:show, :update]
     patch '/orders/:order_id/order_details/:id', to: 'order_details#update', as: 'order_details'
   end
 
