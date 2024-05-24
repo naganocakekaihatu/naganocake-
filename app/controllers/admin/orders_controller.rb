@@ -12,7 +12,13 @@
 
     def update
       order = Order.find(params[:id])
-      order.update(order_params)
+      order.update(status: params[:order][:status])
+      order_details = order.order_details
+
+      if params[:order][:status] == "confirm_payment" #前の画面で「入金確認」が選択されたならを定義
+        order_details.update(making_status:"waiting_manufacture") #Order_detailの制作ステータスを「製作待ち」に更新する
+      end
+
       flash[:notice] = "注文ステータスを更新しました。"
       redirect_to admin_order_path(order.id)
     end

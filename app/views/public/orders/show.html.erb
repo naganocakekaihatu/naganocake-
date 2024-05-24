@@ -18,7 +18,9 @@
       </tr>
       <tr>
         <td>ステータス</td>
-        <td><%= @status %></td>
+        <td>
+          <%= I18n.t("enums.order.status.#{@order.status}") %>
+        </td>
       </tr>
     </table>
 
