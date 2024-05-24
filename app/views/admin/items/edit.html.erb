@@ -34,12 +34,14 @@
            <p>
          </th>
          <td style="padding-left: 30px;">
-           <p><%= f.text_field :name, class: "form-control-lg", style: "width: 500px;", placeholder: "商品名" %></p>
+           <p>
+               <%= f.text_field :name, class: "form-control-lg", style: "width: 500px;", placeholder: "商品名" %>
+           </p>
          </td>
       </tr>
       <tr>
          <th>
-           <p style="margin-top: -90%;"><%= f.label :商品説明文 %><p>
+           <p style="margin-top: -90%;"><%= f.label :商品説明 %><p>
          </th>
          <td style="padding-left: 30px;">
            <p><%= f.text_area :introduction,class: "form-control-lg", style: "width: 500px;height: 200px;", placeholder: "ここに説明文を記述します" %></p>
@@ -63,19 +65,25 @@
          </th>
          <td>
            <p style="padding-left: 30px;">
-             <%= f.text_field :price %>円
+             <%= f.text_field :price, class: "form-control-lg", style: "width: 500px;", placeholder: "1000" %>円
            </p>
          </td>
       </tr>
       <tr>
          <th>
-           <p><%= f.label :販売ステータス %><p>
-         </th>
-         <td>
+           <p class="text-left  mt-3 mb-2">
+               <%= f.label :販売ステータス %>
            <p>
-             <%= f.check_box :is_active, checked_value: true, unchecked_value: false %>
-             <%= f.label :"販売中" %>
-          </p>
+         </th>
+         <td style="padding-left: 30px;">
+          <span style= "margin-right: 90px">
+             <%= f.radio_button :is_active, true %>
+             <%= f.label :"販売中", class: "text-success" %>
+          </span>
+          <span>
+             <%= f.radio_button :is_active, false %>
+             <%= f.label :"販売停止中", class: "text-danger" %>
+          </span>
          </td>
       </tr>
      </table>
@@ -83,7 +91,7 @@
   </div>
 </div>
 <p class="text-center">
-  <%= f.submit "更新", class: "btn btn-success btn-lg" %>
+  <%= f.submit "変更を保存", class: "btn btn-success btn-lg" %>
 </p>
 <% end %>
 

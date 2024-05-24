@@ -31,7 +31,7 @@
        </tr>
        <tr>
          <th>
-            <p class="text-left  mt-2 mb-2">
+            <p class="text-left  mt-1 mb-2">
               <%= f.label :商品名 %>
             </p>
          </th>
@@ -79,15 +79,19 @@
         </tr>
         <tr>
           <th>
-            <p>  
+            <p class="text-left  mt-2 mb-2">  
               <%= f.label :販売ステータス %>
             </p>
           </th>
-          <td>
-            <p>
-              <%= f.check_box :is_active, checked_value: true, unchecked_value: false %>
-              <%= f.label :販売中 %>
-            </p>
+          <td style="padding-left: 30px;">
+            <span style= "margin-right: 90px">
+              <%= f.radio_button :is_active, true %>
+              <%= f.label :"販売中", class: "text-success" %>
+            </span>
+            <span>
+             <%= f.radio_button :is_active, false %>
+             <%= f.label :"販売停止中", class: "text-danger" %>
+            </span>
           </td>
         </tr>
       </table>
