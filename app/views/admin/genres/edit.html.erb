@@ -1,5 +1,8 @@
-<h1>ジャンル編集</h1>
-
+<div class="container">
+  <h4 class="p-3 d-inline-block" style="background-color: #CCCCCC; margin-bottom: 40px;">
+    ジャンル編集
+  </h4>
+</div>
 <% if @genre.errors.any? %>
   <%= @genre.errors.count %>件のエラーが発生しました。
   <ul>
@@ -9,11 +12,18 @@
   </ul>
 <% end %>
 
-<div>
   <%= form_with model: @genre, url: admin_genre_path do |f| %>
-    <%= f.label :ジャンル名 %>
-    <%= f.text_field :name %>
-    
-    <%= f.submit "更新" %>  
+   <div class="d-flex">
+    <div class="form-group  ml-5">
+      <h4 class="text-left  mt-2 mb-2">
+        <%= f.label :ジャンル名 %>
+      </h4>
+    </div>
+    <div class="form-group ml-5">
+        <%= f.text_field :name , class: "btn-lg", style: "width: 300px;" %>
+    </div>
+    <div class="form-group ml-5">
+        <%= f.submit "変更を保存", class: "btn btn-success btn-lg" %>  
+    </div>
+  </div>
   <% end %>
-</div>

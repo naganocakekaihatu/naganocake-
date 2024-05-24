@@ -1,26 +1,43 @@
-<h2>注文一覧</h2>
+<div class="container">
+   <h4 class="p-3 d-inline-block" style="background-color: #CCCCCC; margin-bottom: 40px;">
+    注文一覧
+   </h4>
+</div>
+ <div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>購入日時</th>
+            <th>購入者</th>
+            <th>注文個数</th>
+            <th>注文ステータス</th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td style="text-decoration: underline; color: black;">
+                <%= link_to order.created_at.strftime("%Y/%m/%d %H:%M"), admin_order_path(order.id), style: "color: #000000;" %>
+              </td>
+              <td>
+                <%= order.customer.family_name + order.customer.first_name %>
+              </td>
+              <td>
+                <%= order.order_details.sum(:amount) %>
+              </td>
+              <td>
+                <%= order.status %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+ </div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>購入日時</th>
-      <th>購入者</th>
-      <th>注文個数</th>
-      <th>注文ステータス</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= link_to order.created_at.strftime("%Y/%m/%d %H:%M"), admin_order_path(order.id) %></td>
-        <td><%= order.customer.family_name + order.customer.first_name %></td>
-        <td><%= order.order_details.sum(:amount) %></td>
-        <td>
-          <%= I18n.t("enums.order.status.#{order.status}") %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 <%= paginate @orders %>
+

@@ -1,51 +1,102 @@
-<h2><%= @customer.family_name + @customer.first_name %>さんの会員詳細</h2>
+<div class="container">
+   <h4 class="p-3 d-inline-block" style="background-color: #CCCCCC; margin-bottom: 40px;">
+    <%= @customer.family_name + @customer.first_name %>さんの会員詳細
+   </h4>
+</div>
 
-<table class="table">
-  <tbody>
-    <tr>
-      <th>会員ID</th>
-      <td><%= @customer.id %></td>
-    </tr>
-    <tr>
-      <th>氏名</th>
-      <td><%= @customer.family_name + @customer.first_name %></td>
-    </tr>
-    <tr>
-      <th>フリガナ</th>
-      <td><%= @customer.family_name_kana + @customer.first_name_kana %></td>
-    </tr>
-    <tr>
-      <th>郵便番号</th>
-      <td><%= @customer.postal_code %></td>
-    </tr>
-    <tr>
-      <th>住所</th>
-      <td><%= @customer.address %></td>
-    </tr>
-    <tr>
-      <th>電話番号</th>
-      <td><%= @customer.telephone_number %></td>
-    </tr>
-    <tr>
-      <th>メールアドレス</th>
-      <td><%= @customer.email %></td>
-    </tr>
-    <tr>
-      <th>郵便番号</th>
-      <td><%= @customer.postal_code %></td>
-    </tr>
-    <tr>
-      <th>会員ステータス</th>
-      <td>
-        <% if @customer.is_deleted == true %>
-            有効
-        <% else %>
-            退会
-        <% end %>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="container">
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 23px;">
+        会員ID
+      </span>
+      <span style="margin-left: 135px;"> 
+        <%= @customer.id %>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 23px;">
+        氏名
+      </span>
+      <span style="margin-left: 150px;">
+        <%= @customer.family_name + @customer.first_name %>
+      </span> 
+    </div>
+  </div>
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 23px;">
+        フリガナ
+      </span>
+      <span style="margin-left: 117px;">
+        <%= @customer.family_name_kana + @customer.first_name_kana %>
+      </span> 
+    </div>
+  </div>
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 23px;">
+        郵便番号
+      </span>
+      <span style="margin-left: 120px;">
+        <%= @customer.postal_code %>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 23px;">
+        住所
+      </span>
+      <span style="margin-left: 150px;">
+        <%= @customer.address %>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 23px;">
+        電話番号
+      </span>
+      <span style="margin-left: 120px;">
+        <%= @customer.telephone_number %>
+      </span>
+    </div>
+  </div>  
+   <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 23px;">      
+        メールアドレス
+      </span>
+      <span style="margin-left: 74px;">  
+        <%= @customer.email %>
+      </span>
+    </div>
+  </div>    
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 23px;">      
+        会員ステータス
+      </span>
+      <span style="margin-left: 74px;">      
+            <% if @customer.is_deleted == true %>
+                <p class = "text-success">有効</p>
+            <% else %>
+                <p class = "text-danger">退会</p>
+            <% end %>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 210px;">  
+   <%= link_to "編集する", edit_admin_customer_path, class: "btn btn-success btn-lg", style: "margin-right: 30px;" %>
+    </span>
+      <span style="margin-left: 74px;">   
+   <%= link_to "注文履歴一覧を見る", admin_path, class: "btn btn-primary btn-lg" %>
+     </span>
+    </div>
+</div>
 
-<%= link_to "編集する", edit_admin_customer_path %>
-<%= link_to "注文履歴一覧を見る", admin_path %>

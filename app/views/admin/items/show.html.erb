@@ -5,83 +5,80 @@
 </div>
 
 <div class="container">
-<p>
-  <% if @item.image.attached? %>
-    <%= image_tag @item.image, size:"200x200" %>
-  <% else %>
-    <%= image_tag "no-image", size:"200x200" %>
-  <% end %>
-</p>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-12 d-flex justify-content-center">
-     <table style="margin-top: -23%;">
-        <tr>
-           <th>
-             <p>商品名</p>
-           </th>
-           <td>
+ <div class="row">
+  <div class="col-md-4">
+    <p>
+      <% if @item.image.attached? %>
+        <%= image_tag @item.image, size:"200x200" %>
+      <% else %>
+        <%= image_tag "no-image", size:"200x200" %>
+      <% end %>
+    </p>
+  </div>
+  <div class="col-md-8">
+    <div class="container">
+      <div class="row">
+        <div style="display: flex; margin-bottom: 20px;">
+          <span style="margin-left: 23px;">
+             商品名
+          </span>
+          <span style="margin-left: 135px;"> 
              <p ><%= @item.name %></p>
-           </td>
-        </tr>
-        <tr>
-           <th>
-             <p>商品説明</p>
-           </th>
-           <td>
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div style="display: flex; margin-bottom: 20px;">
+          <span style="margin-left: 23px;">
+            商品説明
+          </span>
+          <span style="margin-left: 120px;">
              <p><%= @item.introduction %></p>
-           </td>
-        </tr>
-        <tr>
-           <th>
-             <p>ジャンル</p>
-           </th>
-           <td>
-             <p><%= @item.genre.name %></p>
-           </td>
-        </tr>
-        <tr>
-           <th>
-             <p>
-               税込価格<br>
-               (税抜価格)
-             </p>
-           </th>
-           <td>
-             <p>
+          </span> 
+        </div>
+      </div>
+      <div class="row">
+        <div style="display: flex; margin-bottom: 20px;">
+          <span style="margin-left: 23px;">
+             ジャンル
+          </span>
+          <span style="margin-left: 120px;">
+             <%= @item.genre.name %>
+          </span> 
+        </div>
+      </div>
+      <div class="row">
+        <div style="display: flex; margin-bottom: 20px;">
+          <span style="margin-left: 23px;"> 
+             税込価格<br>
+             (税抜価格)
+          </span>
+          <span style="margin-left: 105px;">
                <%=  (@item.price * 1.1).round %> （<%= @item.price %>）円
-             </p>
-           </td>
-        </tr>
-        <tr>
-           <th>
-             <p>販売ステータス</p>
-           </th>
-           <td>
+          </span> 
+        </div>
+      </div>
+      <div class="row">
+        <div style="display: flex; margin-bottom: 20px;">
+          <span style="margin-left: 23px;"> 
+             販売ステータス
+          </span>
+          <span style="margin-left: 70px;">
                <% if @item.is_active %>
                   <p class="text-success">販売中</p>
                <% else %>
                   <p  class="text-danger">販売停止</p>
                <% end %>
-           </td>
-        </tr>
-        <tr>
-           <th>
+          </span> 
+        </div>
+      </div>
              <p>作成日時<%= @item.created_at %></p>
-           </th>
-        </tr>
-        <tr>
-           <th>
+       
              <p>更新日時<%= @item.updated_at %></p>
-           </th>
-        </tr>
-    
-     </table>
-    </div>
+       
+   </div>
   </div>
- </div>
+</div>
  
  <p class="text-center">
     <%= link_to "編集", edit_admin_item_path(@item.id), class: "btn btn-success btn-lg" %>
