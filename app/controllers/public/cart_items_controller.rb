@@ -18,7 +18,7 @@ module Public
         if my_cart_item.present?
           my_cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
           my_cart_item.amount += params[:cart_item][:amount].to_i
-          my_cart_item.update(amount: cart_item.amount)
+          my_cart_item.update(amount: my_cart_item.amount)
           redirect_to cart_items_path
         else
           if cart_item.save
@@ -48,11 +48,11 @@ module Public
       end
 
       # カート商品を空ににする
-      def all_destroy
-          @cart_item = current_customer.cart_items
-          @cart_item.destroy_all
-          flash[:alert] = "カートの商品を全て削除しました"
-          redirect_to customers_cart_items_path
+      def destroy_all
+          @cart_items = current_customer.cart_items
+          @cart_items.destroy_all
+          flash[:notice] = "カートの商品を全て削除しました"
+          redirect_to cart_items_path
       end
 
 
