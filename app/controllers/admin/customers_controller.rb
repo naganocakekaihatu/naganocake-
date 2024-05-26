@@ -1,7 +1,15 @@
 # module Admin　←モデル名Adminが存在し、名前がブッキングしてエラーになるのでコメントアウトしてます
   class Admin::CustomersController < ApplicationController
     def index
-      @customers = Customer.page(params[:page])
+      @word = params[:word]
+      
+      if @word.present?
+        @title = "「#{@word}」の検索結果"
+        @customers = Customer.where("CONCAT(family_name, first_name) LIKE ?", "%#{@word}%").page(params[:page]).per(10)
+      else
+        @title = "会員一覧"
+        @customers = Customer.page(params[:page]).per(10)
+      end
     end
 
     def show
