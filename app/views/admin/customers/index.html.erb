@@ -1,7 +1,13 @@
 <div class="container">
   <h4 class="p-3 d-inline-block" style="background-color: #CCCCCC; margin-bottom: 40px;">
-   会員一覧
+   <%= @title %>
   </h4>
+  <div>
+    <%= form_with url: admin_customers_path, method: :get do |f| %>
+      <%= f.text_field :word %>
+      <%= f.submit "検索" %>
+    <% end %>
+  </div>
 </div>
 
  <div class="container">

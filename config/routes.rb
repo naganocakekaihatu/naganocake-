@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
   scope module: :public do
     resources :items
+    get "search" => "searches#search"
+    get '/genre/searches' => 'searches#genre_searches'
     get '/customers/unsubscribe', to: 'customers#unsubscribe', as: 'customer_unsubscribe'
     patch '/customers/withdraw', to: 'customers#withdraw', as: 'customer_withdraw'
     get '/customers/withdraw' => 'customers#withdraw'
