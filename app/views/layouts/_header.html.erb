@@ -4,6 +4,9 @@
       <a class="navbar-brand" href="/"><span>LOGO</span></a>
       <ul class="navbar-nav">
         <% if customer_signed_in? %>
+          <div class="mt-3 mr-5 text-white">
+            ようこそ、<%= current_customer.family_name + current_customer.first_name %>さん!
+          </div>
           <li class="nav-item">
             <%= link_to customer_path(current_customer), class: "nav-link text-light" do %>
               マイページ
