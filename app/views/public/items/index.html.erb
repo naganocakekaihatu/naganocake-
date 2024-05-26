@@ -12,7 +12,7 @@
         <br>
         <%= link_to item.name, item_path(item) %>
         <br>
-        <%= item.price %>円
+        <%= item.with_tax_price.to_s(:delimited) %>円
         <br>
         <% if item.is_active %>
           <span>販売中</span>

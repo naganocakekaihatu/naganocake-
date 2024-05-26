@@ -9,6 +9,7 @@
       @order = Order.find(params[:id])
       # @order_details= OrderDetail.where(order_id: @order.id)
       @order_details = @order.order_details
+
     end
 
     def update
