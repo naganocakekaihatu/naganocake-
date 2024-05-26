@@ -27,7 +27,7 @@
   <div>
     <h2>配送先</h2>
     <div class="mb-3">
-      <div>
+      <div class="form-check">
         <strong>
           <%= f.radio_button :address_o, 0, :checked => true, class: "form-check-input" %>
           ご自身の住所
@@ -39,7 +39,7 @@
 
     <% if current_customer.addresses.present? %>
       <div class="mb-3">
-        <div>
+        <div class="form-check">
           <strong>
             <%= f.radio_button :address_o, 1, class: "form-check-input" %>
             登録済み住所
@@ -50,7 +50,7 @@
     <% end %>
 
     <div class="mb-3">
-      <div>
+      <div class="form-check">
         <strong>
           <%= f.radio_button :address_o, 2, class: "form-check-input" %>
           新しいお届け先
