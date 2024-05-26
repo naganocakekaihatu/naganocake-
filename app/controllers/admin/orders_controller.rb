@@ -1,6 +1,7 @@
 # module Admin ←モデル名Adminが存在し、名前がブッキングしてエラーになるのでコメントアウトしてます
   class Admin::OrdersController < ApplicationController
     # before_action :authenticate_customer!
+    before_action :authenticate_admin!
     def index
     end
 
