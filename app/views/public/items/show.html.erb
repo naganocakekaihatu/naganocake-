@@ -13,7 +13,7 @@
     <div class="col">
       <p class="mt-4"><%= @item.genre.name %></p>
       <p><%= @item.name %></p>
-      <p><%= @item.price %>円</p>
+      <p><%= @item.with_tax_price.to_s(:delimited) %>円</p>
       <% if @item.is_active %>
         <p>販売中</p>
       <% else %>

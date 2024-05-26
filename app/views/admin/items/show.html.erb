@@ -22,7 +22,7 @@
           <span style="margin-left: 23px;">
              商品名
           </span>
-          <span style="margin-left: 135px;"> 
+          <span style="margin-left: 135px;">
              <p ><%= @item.name %></p>
           </span>
         </div>
@@ -34,7 +34,7 @@
           </span>
           <span style="margin-left: 120px;">
              <p><%= @item.introduction %></p>
-          </span> 
+          </span>
         </div>
       </div>
       <div class="row">
@@ -44,23 +44,23 @@
           </span>
           <span style="margin-left: 120px;">
              <%= @item.genre.name %>
-          </span> 
+          </span>
         </div>
       </div>
       <div class="row">
         <div style="display: flex; margin-bottom: 20px;">
-          <span style="margin-left: 23px;"> 
+          <span style="margin-left: 23px;">
              税込価格<br>
              (税抜価格)
           </span>
           <span style="margin-left: 105px;">
-               <%=  (@item.price * 1.1).round %> （<%= @item.price %>）円
-          </span> 
+               <%=  (@item.price * 1.1).round.to_s(:delimited) %> （<%= @item.price.to_s(:delimited) %>）円
+          </span>
         </div>
       </div>
       <div class="row">
         <div style="display: flex; margin-bottom: 20px;">
-          <span style="margin-left: 23px;"> 
+          <span style="margin-left: 23px;">
              販売ステータス
           </span>
           <span style="margin-left: 70px;">
@@ -69,23 +69,23 @@
                <% else %>
                   <p  class="text-danger">販売停止</p>
                <% end %>
-          </span> 
+          </span>
         </div>
       </div>
              <p>作成日時<%= @item.created_at %></p>
-       
+
              <p>更新日時<%= @item.updated_at %></p>
-       
+
    </div>
   </div>
 </div>
- 
+
  <p class="text-center">
     <%= link_to "編集", edit_admin_item_path(@item.id), class: "btn btn-success btn-lg" %>
     /
     <%= link_to "削除", admin_item_path(@item.id), method: :delete, data: { confirm: "本当に削除しますか？" } , class: "btn btn-danger btn-lg"%>
  </p>
- 
+
  <p class="container">
     <%= link_to "商品一覧へ", admin_items_path , class: "btn btn-primary btn-lg"%>
  </p>

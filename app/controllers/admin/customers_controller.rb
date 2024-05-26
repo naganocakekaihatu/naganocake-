@@ -1,5 +1,7 @@
 # module Admin　←モデル名Adminが存在し、名前がブッキングしてエラーになるのでコメントアウトしてます
   class Admin::CustomersController < ApplicationController
+    before_action :authenticate_admin!
+
     def index
       @word = params[:word]
       

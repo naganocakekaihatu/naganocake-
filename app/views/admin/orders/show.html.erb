@@ -4,7 +4,7 @@
 
   <div class="d-flex m-2 text-left">
     <div class="w-25 text-left">購入者</div>
-    <div class="w-25 text-left"><%= link_to @order.customer.family_name + @order.customer.first_name, admin_customer_path(@order.id) %></div>
+    <div class="w-25 text-left"><%= link_to @order.customer.family_name + @order.customer.first_name, admin_customer_path(@order.customer_id) %></div>
   </div>
 
   <div class="d-flex m-2 text-left">
@@ -48,9 +48,9 @@
     <% @order_details.each do |order_detail| %>
       <tr>
         <td><%= order_detail.item.name %></td>
-        <td><%= order_detail.item.with_tax_price %></td>
+        <td><%= order_detail.item.with_tax_price.to_s(:delimited) %></td>
         <td><%= order_detail.amount %></td>
-        <td><%= order_detail.amount * order_detail.item.with_tax_price %></td>
+        <td><%= (order_detail.amount * order_detail.item.with_tax_price).to_s(:delimited) %></td>
         <td>
           <%= form_with model: order_detail, url: admin_order_details_path(order_id: @order.id, id: order_detail), method: :patch do |f| %>
               <%= f.select :making_status, OrderDetail.making_statuses.keys.map {|k| [I18n.t("enums.order_detail.making_status.#{k}"),k]} %>
@@ -66,7 +66,7 @@
     <table class="table">
       <tr>
         <th>商品合計</th>
-        <td><%= @order.total_payment - 800 %></td>
+        <td><%= (@order.total_payment - 800).to_s(:delimited) %></td>
       </tr>
       <tr>
         <th>送料</th>
@@ -74,7 +74,7 @@
       </tr>
       <tr>
         <th>請求金額</th>
-        <td><%= @order.total_payment %></td>
+        <td><%= @order.total_payment.to_s(:delimited) %></td>
       </tr>
     </table>
   </div>
