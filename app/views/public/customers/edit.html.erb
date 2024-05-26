@@ -1,8 +1,8 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <h2 class="text-center">会員情報編集</h2>
-
+   <h4 class="p-3 d-inline-block" style="background-color: #CCCCCC; margin-bottom: 40px;">
+     会員情報編集
+   </h4>
+</div>
       <% if @customer.errors.any? %>
         <div class="alert alert-danger">
           <%= @customer.errors.count %>件のエラーが発生しました。
@@ -15,56 +15,92 @@
       <% end %>
 
       <%= form_with model: @customer do |f| %>
-        <div class="form-group">
-          <%= f.label :family_name, "名前(姓)" %>
-          <%= f.text_field :family_name, class: "form-control" %>
-        </div>
+      <div class="container">
+        <div class="row">
+          <div style="display: flex; margin-bottom: 20px;">
+            <span style="margin-left: 5px;">
+              氏名
+            </span>
+            <span style="margin-left: 135px;"> 
+             <%= f.text_field :family_name, class: "form-control" %>
+            </span>
+            <span style="margin-left: 50px;"> 
+             <%= f.text_field :first_name, class: "form-control" %>
+            </span>
+          </div>
+        </div> 
+        <div class="row">
+          <div style="display: flex; margin-bottom: 20px;">
+            <span style="margin-left: 5px;">
+              フリガナ
+            </span>
+            <span style="margin-left: 105px;"> 
+              <%= f.text_field :family_name_kana, class: "form-control" %>
+            </span>
+            <span style="margin-left: 50px;"> 
+              <%= f.text_field :first_name_kana, class: "form-control" %>
+            </span>
+          </div>
+        </div> 
+        
+        <div class="row">
+          <div style="display: flex; margin-bottom: 20px;">
+            <span style="margin-left: 5px;">
+              <%= f.label :postal_code, "郵便番号" %>
+            </span>
+            <span style="margin-left: 105px;"> 
+              <%= f.text_field :postal_code, class: "form-control" %>
+            </span>
+          </div>
+        </div> 
+        
+        <div class="row">
+          <div style="display: flex; margin-bottom: 20px;">
+            <span style="margin-left: 5px;">
+              <%= f.label :address, "住所" %>
+            </span>
+            <span style="margin-left: 138px;"> 
+              <%= f.text_field :address, class: "form-control", style: "width: 450px;" %>
+            </span>
+          </div>
+        </div> 
+        
+        <div class="row">
+          <div style="display: flex; margin-bottom: 20px;">
+            <span style="margin-left: 5px;">
+              <%= f.label :telephone_number, "電話番号" %>
+            </span>
+            <span style="margin-left: 105px;"> 
+              <%= f.text_field :telephone_number, class: "form-control" %>
+            </span>
+          </div>
+        </div> 
 
-        <div class="form-group">
-          <%= f.label :first_name, "名前(名)" %>
-          <%= f.text_field :first_name, class: "form-control" %>
-        </div>
+        <div class="row">
+          <div style="display: flex; margin-bottom: 20px;">
+            <span style="margin-left: 5px;">
+              <%= f.label :email, "メールアドレス" %>
+            </span>
+            <span style="margin-left: 60px;"> 
+              <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
+            </span>
+          </div>
+        </div> 
 
-        <div class="form-group">
-          <%= f.label :family_name_kana, "フリガナ(セイ)" %>
-          <%= f.text_field :family_name_kana, class: "form-control" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :first_name_kana, "フリガナ(メイ)" %>
-          <%= f.text_field :first_name_kana, class: "form-control" %>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <%= f.label :telephone_number, "電話番号(ハイフンなし)" %>
-          <%= f.text_field :telephone_number, class: "form-control" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :email, "メールアドレス" %>
-          <%= f.email_field :email, class: "form-control", autofocus: true, autocomplete: "email" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :postal_code, "郵便番号(ハイフンなし)" %>
-          <%= f.text_field :postal_code, class: "form-control" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :address, "住所" %>
-          <%= f.text_field :address, class: "form-control" %>
-        </div>
-
-        <div class="text-center">
-          <%= f.submit "編集内容を保存", class: "btn btn-primary" %>
+        <div class="row">
+          <div style="display: flex; margin-bottom: 20px;">
+            <span style="margin-left: 175px;">
+             <%= f.submit "編集内容を保存", class: "btn btn-success", style: "width: 250px;"%>
+            </span>
+            <span style="margin-left: 300px;"> 
+             <%= link_to "退会する", customer_unsubscribe_path, class: "btn btn-danger" %>
+            </span>
+          </div>
         </div>
       </div>
       <% end %>
 
-      <div class="text-center mt-4">
-        <%= link_to "退会する", customer_unsubscribe_path, class: "btn btn-danger" %>
-      </div>
-    </div>
-  </div>
-</div>
+     
+        
+    
+  
