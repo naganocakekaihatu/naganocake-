@@ -1,26 +1,48 @@
-<h1 class="text-center">配送先登録・一覧</h1>
+<div class="container">
+   <h4 class="p-3 d-inline-block" style="background-color: #CCCCCC; margin-bottom: 40px;">
+     配送先登録・一覧
+   </h4>
+</div>
+
 <%= form_for @address, url: addresses_path, method: :post do |f| %>
-  <div class="form-group">
-    <%= f.label :postal_code, "郵便番号" %>
-    <div class="col-sm-5">
-    <%= f.text_field :postal_code, class: "form-control", autofocus: true, autocomplete: "postal_code" %>
+  <div class="container">
+    <div class="row">
+      <div style="display: flex; margin-bottom: 20px;">
+        <span style="margin-left: -50px;">
+          <%= f.label :postal_code, "郵便番号(ハイフンなし)" %>
+        </span>
+        <span style="margin-left: 90px;"> 
+          <%= f.text_field :postal_code, class: "form-control", autofocus: true, autocomplete: "postal_code" , style: "width: 450px;"%>
+        </span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :address, "住所" %>
-    <div class="col-sm-5">
-    <%= f.text_field :address, class: "form-control", autofocus: true, autocomplete: "address" %>
+    <div class="row">
+      <div style="display: flex; margin-bottom: 20px;">
+        <span style="margin-left: -50px;"> 
+         <%= f.label :address, "住所" %>
+        </span>
+        <span style="margin-left: 228px;"> 
+         <%= f.text_field :address, class: "form-control", autofocus: true, autocomplete: "address", style: "width: 800px;" %>
+        </span>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :name, "宛名" %>
-    <div class="col-sm-5">
-    <%= f.text_field :name, class: "form-control", autofocus: true, autocomplete: "name" %>
+  
+    <div class="row">
+      <div style="display: flex; margin-bottom: 20px;">
+        <span style="margin-left: -50px;"> 
+          <%= f.label :name, "宛名" %>
+        </span>
+        <span style="margin-left: 228px;"> 
+          <%= f.text_field :name, class: "form-control", autofocus: true, autocomplete: "name", style: "width: 450px;" %>
+        </span>
+        <span style="margin-left: 228px;"> 
+          <%= f.submit "新規登録", class: "btn btn-success", style: "width: 200px;" %>
+        </span>
+      </div>
     </div>
-  </div>
-  <div class="text-center">
-    <%= f.submit "新規登録", class: "btn btn-primary" %>
-  </div>
+   
+  
+
 <% end %>
 
 <h1 class="text-center mt-4">登録情報</h1>

@@ -1,4 +1,8 @@
-<h1 class="display-4">注文情報入力</h1>
+<div class="container">
+   <h1 class="p-3 d-inline-block" style="background-color: #CCCCCC; margin-bottom: 40px;">
+     注文情報入力
+   </h1>
+</div>
 
 <% if @order.errors.any? %>
   <div class="alert alert-danger">
@@ -12,65 +16,87 @@
 <% end %>
 
 <%= form_with model: @order, url: confirm_orders_path, method: :post do |f| %>
-  <div>
-    <h2>支払い方法</h2>
-    <div class="form-check">
-      <%= f.radio_button :payment_method, "credit_card", :checked => true, class: "form-check-input" %>
-      <%= f.label :payment_method, "クレジットカード", class: "form-check-label" %>
-    </div>
-    <div class="form-check">
-      <%= f.radio_button :payment_method, "transfer", class: "form-check-input" %>
-      <%= f.label :payment_method, "銀行振込", class: "form-check-label" %>
+  <div class="container">
+    <div class="row">
+      <div style="display: flex; margin-bottom: 20px;">
+        <span style="margin-left: -50px;">
+          <h2>支払い方法</h2>
+          <div class="form-check" style="margin-left: 80px;">
+            <%= f.radio_button :payment_method, "credit_card", :checked => true, class: "form-check-input" %>
+            <%= f.label :payment_method, "クレジットカード", class: "form-check-label" %>
+          </div>
+          <div class="form-check" style="margin-left: 80px;">
+            <%= f.radio_button :payment_method, "transfer", class: "form-check-input" %>
+            <%= f.label :payment_method, "銀行振込", class: "form-check-label" %>
+          </div>
+        </span>
+      </div>
     </div>
   </div>
-
-  <div>
-    <h2>配送先</h2>
-    <div class="mb-3">
-      <div class="form-check">
-        <strong>
-          <%= f.radio_button :address_o, 0, :checked => true, class: "form-check-input" %>
-          ご自身の住所
-        </strong>
+    
+    <div class="row">
+      <div style="display: flex; margin-bottom: 20px;">
+        <span style="margin-left: -50px;">
+          <h2>配送先</h2>
+            <div style="margin-left: 80px;">
+                <strong>
+                  <%= f.radio_button :address_o, 0, :checked => true %>
+                  ご自身の住所
+                </strong>
+            </div>
+            <div>
+                <span style="margin-left: 110px;"><%= current_customer.postal_code %></span>
+                <span><%= current_customer.address %></span>
+            </div>
+        </span>
       </div>
-      <span><%= current_customer.postal_code %></span>
-      <span><%= current_customer.address %></span>
     </div>
-
+    
     <% if current_customer.addresses.present? %>
-      <div class="form-check mb-3">
-        <div>
-          <strong>
-            <%= f.radio_button :address_o, 1, class: "form-check-input" %>
+
+     <div class="row">
+      <div style="display: flex; margin-bottom: 20px;">
+        <span style="margin-left: -50px;">       
+          <strong  style="margin-left: 80px;">
+            <%= f.radio_button :address_o, 1 %>
             登録済み住所
           </strong>
-        </div>
-        <span><%= f.collection_select :address_id, current_customer.addresses, :id, :address, {}, {class: "form-control"} %></span>
+          <div>
+            <span>
+              <%= f.collection_select :address_id, current_customer.addresses, :id, :address, {}, {class: "form-control", style: "margin-left: 110px; width: 800px;"} %>
+            </span>
+          </div>
+        </span>
       </div>
+     </div>
     <% end %>
 
-    <div class="form-check mb-3">
-      <div>
-        <strong>
-          <%= f.radio_button :address_o, 2, class: "form-check-input" %>
-          新しいお届け先
-        </strong>
+    <div class="row">
+      <div style="display: flex; margin-bottom: 20px;">
+        <span style="margin-left: -50px;"> 
+          <strong style="margin-left: 80px;">
+            <%= f.radio_button :address_o, 2 %>
+            新しいお届け先
+          </strong>
+            <table style="margin-left: 110px;">
+              <tr>
+                <td>郵便番号(ハイフンなし)</td>
+                <td ><%= f.text_field :postal_code, class: "form-control", style: "margin-left: 20px; width: 300px;" %></td>
+              </tr>
+              <tr>
+                <td>住所</td>
+                <td><%= f.text_field :address, class: "form-control", style: "margin-left: 20px; width: 600px;" %></td>
+              </tr>
+              <tr>
+                <td>宛名</td>
+                <td><%= f.text_field :name, class: "form-control", style: "margin-left: 20px; width: 300px;" %></td>
+              </tr>
+            </table>
+        </span>
       </div>
-      <table>
-        <tr>
-          <td>郵便番号</td>
-          <td><%= f.text_field :postal_code, class: "form-control" %></td>
-        </tr>
-        <tr>
-          <td>住所</td>
-          <td><%= f.text_field :address, class: "form-control" %></td>
-        </tr>
-        <tr>
-          <td>宛名</td>
-          <td><%= f.text_field :name, class: "form-control" %></td>
-        </tr>
-      </table>
     </div>
-    <%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
+  <div style="text-align: center;">
+    <%= f.submit "確認画面へ進む", class: "btn btn-primary btn-lg", style: "width: 250px;" %>
   </div>
+
 <% end %>

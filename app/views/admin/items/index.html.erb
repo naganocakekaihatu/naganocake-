@@ -16,7 +16,7 @@
     <div class="col-md-12">
       <table class="table">
         <thead>
-          <tr>
+          <tr  class="table-active">
             <th>商品id</th>
             <th>商品写真</th>
             <th>商品名</th>
@@ -40,7 +40,7 @@
             <td>
               <%= link_to item.name, admin_item_path(item) %>
             </td>
-            <td><%= item.with_tax_price.to_s(:delimited) %>円</td>
+            <td><%= item.price.to_s(:delimited) %>円</td>
             <td><%= item.genre.name %></td>
             <td>
               <% if item.is_active %>
