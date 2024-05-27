@@ -34,7 +34,7 @@
           <% end %>
         </td>
         <td><%= cart_item.subtotal %></td>
-        <td><%= link_to "削除", cart_item_path(cart_item.id) ,  method: :delete , data: { confirm: "商品を削除しますか？" } , class: "btn btn-danger" %></td>
+        <td><%= link_to "削除", cart_item_path(cart_item.id),  method: :delete , data: { confirm: "商品を削除しますか？" } , class: "btn btn-danger" %></td>
       </tr>
       <% sum += cart_item.subtotal %>
     <% end %>
@@ -47,4 +47,6 @@
 
 <% if @cart_items.present? %>
   <div><%= link_to "情報入力に進む", new_order_path, class: "btn btn-success m-3" %></div>
+<% else %>
+  <div class="btn btn-secondary m-3">情報入力に進む</div>
 <% end %>
