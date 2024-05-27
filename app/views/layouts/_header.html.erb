@@ -5,26 +5,26 @@
       <ul class="navbar-nav">
         <% if customer_signed_in? %>
           <div class="mt-3 mr-5 text-white">
-            ようこそ、<%= current_customer.family_name + current_customer.first_name %>さん!
+            <i class="fas fa-sign-language"></i>ようこそ、<%= current_customer.family_name + current_customer.first_name %>さん!
           </div>
           <li class="nav-item">
-            <%= link_to customer_path(current_customer), class: "nav-link text-light" do %>
-              マイページ
+            <%= link_to customer_path(current_customer), class: "nav-link text-light"  do %>
+              <i class="fab fa-ello"></i>マイページ
             <% end %>
           </li>
           <li class="nav-item">
             <%= link_to items_path, class: "nav-link text-light" do %>
-              商品一覧
+              <i class="fas fa-cheese"></i>商品一覧
             <% end %>
           </li>
           <li class="nav-item">
             <%= link_to cart_items_path, class: "nav-link text-light" do %>
-              カート
+              <i class="fas fa-shopping-cart"></i>カート
             <% end %>
           </li>
           <li class="nav-item">
             <%= link_to destroy_customer_session_path, method: :delete, class: "nav-link text-light" do %>
-              ログアウト
+              <i class="fas fa-door-open"></i>ログアウト
             <% end %>
           </li>
         <% elsif admin_signed_in? %>
