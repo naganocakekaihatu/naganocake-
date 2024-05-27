@@ -1,81 +1,89 @@
-<h1 class="display-4">注文情報確認</h1>
+<div class="container">
+   <h2 class="p-3 d-inline-block" style="background-color: #CCCCCC; margin-bottom: 40px;">
+     注文情報確認
+   </h2>
+</div>
+   <div class="container">
+    <div class="row">
+      <div class="col-md-6" >
+        <table class="table" style="width: 100% ;">
+          <tr class="table-active">
+            <th>商品名</th>
+            <th  class="text-center" style="vertical-align: middle;">単価(税込)</th>
+            <th  class="text-center" style="vertical-align: middle;">数量</th>
+            <th  class="text-center" style="vertical-align: middle;">小計</th>
+          </tr>
+          <% @total = 0 %>
+          <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td class="d-flex align-items-center">
+                <% if cart_item.item.image.attached? %>
+                  <%= image_tag cart_item.item.image, size: "100x100" %>
+                <% else %>
+                  <%= image_tag "no-image", size: "100x100" %>
+                <% end %>
+                 <h4 style="margin-left: 10px;"> <%= cart_item.item.name %></h4>
+              </td>
+              <td class="text-center" style="vertical-align: middle;">
+                <h4><%= cart_item.with_tax_price %></h4>
+              </td>
+              <td class="text-center" style="vertical-align: middle;">
+                <h4><%= cart_item.amount %></h4>
+              </td>
+                <h4><% sub_total = cart_item.with_tax_price * cart_item.amount %></h4>
+              <td class="text-center" style="vertical-align: middle;">
+                <h4><%= sub_total %></h4>
+              </td>
+              <% @total += sub_total %>
+            </tr>
+          <% end %>
+        </table>
+      </div>
 
-<div class="row">
   <div class="col-md-6">
-    <table class="table">
+    <table class="table" style="margin-top: 20px; width: 300px; height: 250px;">
       <tr>
-        <th>商品名</th>
-        <th>単価(税込)</th>
-        <th>数量</th>
-        <th>小計</th>
-      </tr>
-      <% @total = 0 %>
-      <% @cart_items.each do |cart_item| %>
-        <tr>
-          <td>
-            <% if cart_item.item.image.attached? %>
-              <%= image_tag cart_item.item.image, size: "100x100" %>
-            <% else %>
-              <%= image_tag "no-image", size: "100x100" %>
-            <% end %>
-            <%= cart_item.item.name %>
-          </td>
-          <td>
-            <%= cart_item.with_tax_price.to_s(:delimited) %>
-          </td>
-          <td>
-            <%= cart_item.amount %>
-          </td>
-          <% sub_total = cart_item.with_tax_price * cart_item.amount %>
-          <td>
-            <%= sub_total.to_s(:delimited) %>
-          </td>
-          <% @total += sub_total %>
-        </tr>
-      <% end %>
-    </table>
-  </div>
-
-  <div class="col-md-6">
-    <table class="table">
-      <tr>
-        <th>送料</th>
-        <td>800</td>
+        <th class="table-active text-center">送料</th>
+        <td  class="text-center" style="vertical-align: middle;">800</td>
       </tr>
       <tr>
-        <th>商品合計</th>
-        <td><%= @total.to_s(:delimited) %></td>
+        <th class="table-active text-center">商品合計</th>
+        <td  class="text-center" style="vertical-align: middle;"><%= @total %></td>
       </tr>
       <tr>
-        <th>請求金額</th>
-        <td><%= (@total + 800).to_s(:delimited) %></td>
+        <th class="table-active text-center">請求金額</th>
+        <td  class="text-center" style="vertical-align: middle;"> <%= @total + 800 %></td>
       </tr>
     </table>
   </div>
 </div>
 
-<h4>支払方法</h4>
-
-<% if params[:order][:address_o].present? %>
-  <% if @order.payment_method == "credit_card" %>
-    クレジットカード
-  <% else %>
-    銀行振込
+<div style="display: flex;">
+  <h2>支払方法</h2>
+  <h4  style="padding-left: 20px; line-height: 2;">
+  <% if params[:order][:address_o].present? %>
+    <% if @order.payment_method == "credit_card" %>
+      クレジットカード
+    <% else %>
+      銀行振込
+    <% end %>
   <% end %>
-<% end %>
+  </h4>
+</div>
 
-
-<h4>お届け先</h4>
-
-<p>郵便番号: <%= @order_postal_code %></p>
-<p>住所: <%= @order_address %></p>
-<p>宛先: <%= @order_name %></p>
-
+<div style="display: flex;">
+<h2>お届け先</h2>
+<h4  style="padding-left: 20px; line-height: 2;">郵便番号: <%= @order_postal_code %></h4>
+<h4  style="padding-left: 20px; line-height: 2;">住所: <%= @order_address %></h4>
+<h4  style="padding-left: 20px; line-height: 2;">宛先: <%= @order_name %></h4>
+</div>
 
 <%= form_with model: @order do |f| %>
   <%= f.hidden_field :postal_code, value: @order_postal_code %>
   <%= f.hidden_field :address, value: @order_address %>
   <%= f.hidden_field :name, value: @order_name %>
   <%= f.hidden_field :payment_method, value: @order.payment_method %>
-  <%= f.submit "注文を確定する" %>
+<div style="display: flex; justify-content: center;">
+  <%= f.submit "注文を確定する", class: "btn btn-success m-3 btn-lg" %>
+</div>
 <% end %>
