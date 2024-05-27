@@ -42,7 +42,7 @@
               <% end %>
             </td>
             <td  class="text-center" style="vertical-align: middle;"><h4><%= cart_item.subtotal %></h4></td>
-            <td  class="text-center" style="vertical-align: middle;"><%= link_to "削除", cart_item_path(cart_item.id) ,  method: :delete , data: { confirm: "商品を削除しますか？" } , class: "btn btn-danger btn-lg" %></td>
+            <td  class="text-center" style="vertical-align: middle;"><%= link_to "削除", cart_item_path(cart_item.id)  ,  method: :delete , data: { confirm: "商品を削除しますか？" } , class: "btn btn-danger btn-lg" %></td>
           </tr>
           <% sum += cart_item.subtotal %>
         <% end %>
