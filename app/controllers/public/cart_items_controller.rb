@@ -15,6 +15,13 @@ module Public
         cart_item.item_id = cart_item_params[:item_id]
         my_cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
 
+        item = Item.find(cart_item_params[:item_id])
+          unless item.is_active
+            flash[:alert] = 'この商品は現在購入できません。'
+            redirect_to item_path(item)
+          return
+          end
+
         if my_cart_item.present?
           my_cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
           my_cart_item.amount += params[:cart_item][:amount].to_i
