@@ -18,35 +18,37 @@
           <%= f.submit "検索" %>
         <% end %>
       </div>
-      <table>
-        <tr>
+      
+      <div class="main-content">
+        <div class="row p-3">
           <% items.each do |item| %>
-            <td>
-              <% if item.image.attached? %>
-                <%= link_to image_tag(item.image, size: "100x100"), item_path(item) %>
-              <% else %>
-                <%= link_to image_tag("no-image", size: "100x100"), item_path(item) %>
-              <% end %>
-              <br>
-              <%= link_to item.name, item_path(item) %>
-              <br>
-              <%= item.price %>円
-              <br>
-              <% if item.is_active %>
-                <span>販売中</span>
-              <% else %>
-                <span>販売停止</span>
-              <% end %>
-              <br>
-              <%= form_with(model: cart_item_new, local: true) do |f| %>
-                <%= f.hidden_field :item_id, value: item.id %>
-                <%= f.select :amount, (1..10).to_a %>
-                <%= f.submit 'カートに追加', class: 'btn btn-primary' %>
-              <% end %>
-            </td>
+            <div class="col-md-4">
+              <div class="content">
+                <% if item.image.attached? %>
+                  <%= link_to image_tag(item.image, size: "100x100"), item_path(item) %>
+                <% else %>
+                  <%= link_to image_tag("no-image", size: "100x100"), item_path(item) %>
+                <% end %>
+                <br>
+                <%= link_to item.name, item_path(item) %>
+                <br>
+                <%= item.price %>円
+                <% if item.is_active %>
+                  <span>販売中</span>
+                <% else %>
+                  <span>販売停止</span>
+                <% end %>
+                <br>
+                <%= form_with(model: cart_item_new, local: true) do |f| %>
+                  <%= f.hidden_field :item_id, value: item.id %>
+                  <%= f.select :amount, (1..10).to_a %>
+                  <%= f.submit 'カートに追加', class: 'btn btn-primary' %>
+                <% end %>
+              </div>
+            </div>
           <% end %>
-        </tr>
-      </table>
+        </div>
+      </div>
       
       <div style="text-align: center;">
         <div class="pagination" style="display: inline-block; margin-top: 10px;">

@@ -7,10 +7,10 @@ module Public
       @search_path = items_path
       if @word.present?
         @title = "商品一覧<br>「#{@word}」の検索結果"
-        @items = Item.where("name like ?", "%#{@word}%").page(params[:page]).per(10)
+        @items = Item.where("name like ?", "%#{@word}%").page(params[:page]).per(9)
       else
         @title = "商品一覧"
-        @items = Item.all.page(params[:page]).per(10)
+        @items = Item.all.page(params[:page]).per(9)
       end
       @cart_item_new = CartItem.new
     end
