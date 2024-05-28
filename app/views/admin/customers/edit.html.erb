@@ -1,2 +1,101 @@
-<h1>Customers#edit</h1>
-<p>Find me in app/views/customers/edit.html.erb</p>
+<div class="container">
+   <h4 class="p-3 d-inline-block" style="background-color: #CCCCCC; margin-bottom: 40px;">
+     <%= @customer.family_name + @customer.first_name %>さんの会員情報編集</h2>
+   </h4>
+</div>
+
+<%= form_with model: @customer, url: admin_customer_path do |f| %>
+ <div class="container">
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 23px;">
+        会員ID
+      </span>
+      <span style="margin-left: 135px;"> 
+        <%= @customer.id %>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 23px;">
+        氏名
+      </span>
+      <span style="margin-left: 150px;"> 
+        <%= f.text_field :family_name, style: "margin-right: 40px;" %><%= f.text_field :first_name %>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 23px;">
+        フリガナ
+      </span>
+      <span style="margin-left: 118px;"> 
+        <%= f.text_field :family_name_kana, style: "margin-right: 40px;" %><%= f.text_field :first_name_kana %>
+      </span>
+    </div>
+  </div>  
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 23px;">
+        郵便番号
+      </span>
+      <span style="margin-left: 118px;"> 
+        <%= f.text_field :postal_code %>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 23px;">
+        住所
+      </span>
+      <span style="margin-left: 150px;"> 
+        <%= f.text_field :address, style: "width: 600px;"%>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 23px;">
+       電話番号
+      </span>
+      <span style="margin-left: 120px;"> 
+      <%= f.text_field :telephone_number %>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 23px;">
+        メールアドレス
+      </span>
+      <span style="margin-left: 75px;">   
+        <%= f.email_field :email %>
+      </span>
+    </div>
+  </div> 
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 23px;">
+        会員ステータス
+      </span>
+      <span style="margin-left: 75px;"> 
+        <span style= "margin-right: 40px">
+          <%= f.radio_button :is_deleted, :true %>
+          <%= f.label :is_deleted, "有効", value: :true, class: "text-success" %>
+        </span>
+        <span> 
+          <%= f.radio_button :is_deleted, :false %>
+          <%= f.label :is_deleted, "退会", value: :false, class: "text-danger" %>
+        </span>
+        
+  <div class="row">
+    <div style="display: flex; margin-top: 20px;">
+      <span style="margin-left: 10px;">  
+        <%= f.submit "変更を保存", class: "btn btn-success btn-lg", style: "width: 190px;" %>
+      </span>
+    </div>
+  </div> 
+<% end %>

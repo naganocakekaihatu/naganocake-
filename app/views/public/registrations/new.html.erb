@@ -1,2 +1,126 @@
-<h1>Registrations#new</h1>
-<p>Find me in app/views/registrations/new.html.erb</p>
+<div class="container">
+   <h4 class="p-3 d-inline-block" style="background-color: #CCCCCC; margin-bottom: 40px;">
+     新規会員登録
+   </h4>
+</div>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form-horizontal" }) do |f| %>
+  <%= render "public/shared/error_messages", resource: resource %>
+
+<div class="container">
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 5px;">
+        名前 
+      </span>
+      <span style="margin-left: 135px;"> 
+        <%= f.label :family_name %> 
+      </span>
+      <span style="margin-left: 50px;">   
+        <%= f.text_field :family_name, class: "form-control", style: "width: 200px;"%> 
+      </span>
+      <span style="margin-left: 135px;"> 
+        <%= f.label :first_name %>  
+      </span>
+      <span style="margin-left: 47px;">    
+        <%= f.text_field :first_name , class: "form-control", style: "width: 200px;"%>
+      </span>
+    </div>
+  </div> 
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 5px;">    
+         フリガナ 
+      </span>
+      <span style="margin-left: 105px;">    
+         <%= f.label :family_name_kana%> 
+      </span>
+      <span style="margin-left: 33px;">      
+         <%= f.text_field :family_name_kana, class: "form-control", style: "width: 200px;" %>  
+      </span>
+      <span style="margin-left: 135px;">    
+         <%= f.label :first_name_kana %> 
+      </span>
+      <span style="margin-left: 30px;">      
+         <%= f.text_field :first_name_kana, class: "form-control", style: "width: 200px;"  %>
+      </span>
+    </div>
+  </div> 
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 5px;">      
+         <%= f.label :email%> 
+      </span>
+      <span style="margin-left: 190px;">     
+         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", style: "width: 200px;"  %>
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 5px;">          
+         <%= f.label :postal_code%> 
+      </span>
+      <span style="margin-left: 183px;">      
+         <%= f.text_field :postal_code, class: "form-control", style: "width: 200px;"  %>  
+      </span>
+    </div>
+  </div>  
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 5px;">              
+        <%= f.label :address %> 
+      </span>
+      <span style="margin-left: 217px;">   
+        <%= f.text_field :address, class: "form-control", style: "width: 613px;" %>
+      </span>
+    </div>
+  </div>  
+  <div class="row">
+    <div style="display: flex; margin-bottom: 10px;">
+      <span style="margin-left: 5px;">        
+        <%= f.label :telephone_number%> 
+      </span>
+      <span style="margin-left: 185px;">    
+        <%= f.text_field :telephone_number, class: "form-control", style: "width: 200px;" %><br>
+      </span>
+    </div>
+  </div>  
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 5px;">
+        <%= f.label :password %> 
+      </span>
+      <span style="margin-left: 170px;">     
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control", style: "width: 200px;"  %>
+      </span>
+    </div>
+  </div>  
+  <div class="row">
+    <div style="display: flex; margin-bottom: 20px;">
+      <span style="margin-left: 5px;">
+        <%= f.label :password_confirmation%>
+      </span>
+      <span style="margin-left: 90px;">    
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", style: "width: 200px;" %>
+      </span>
+      <span style="margin-left: 135px;">    
+      </span>
+    </div>
+  </div>  
+</div>
+
+  <div class="container">
+    <div class="row" style="margin-left: 240px;">
+      <%= f.submit "新規登録", class: "btn btn-success btn-lg", style: "width: 200px;"   %>
+    </div>
+  </div>
+<% end %>
+
+<div class="container">
+   <h4 class="p-3 d-inline-block" style="background-color: #CCCCCC; margin-bottom: 40px;">
+      既に登録済みの方
+   </h4>
+   <div style="margin-left: 70px;">
+      <%= link_to "こちら", new_customer_session_path, style: "text-decoration: underline;" %>  からログインしてください。
+   </div>
+</div>

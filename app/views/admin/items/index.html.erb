@@ -1,27 +1,58 @@
 <%= flash[:notice] %>
-
-<h1>商品一覧</h1>
-<p><%= link_to "新規商品作成", new_admin_item_path %></p>
-
-<table>
-  <% @items.each do |item| %>
-    <tr>
-      <td>
-        <% if item.image.attached? %>
-          <%= image_tag item.image, size:"100x100" %>
-        <% else %>
-          <%= image_tag "no-image", size:"100x100" %>
-        <% end %>  
-        <br><%= link_to item.name, admin_item_path(item) %>
-      </td>
-      <td><%= item.price %>円</td>
-      <td>
-        <% if item.is_active %>
-          <販売中>
-        <% else %>
-          <販売停止>
+<div class="container">
+ <div class="d-flex align-items-center justify-content-between">
+   <h4 class="p-3 d-inline-block" style="background-color: #CCCCCC; margin-bottom: 40px;">
+     商品一覧
+   </h4>
+   <p>
+     <%= link_to new_admin_item_path do %>
+     <i class="fas fa-plus-circle fa-4x fa-inverse" style="box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);border-radius: 50%; background-color: black;"></i>
+     <% end %>
+   </p>
+ </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+          <tr  class="table-active">
+            <th>商品id</th>
+            <th>商品写真</th>
+            <th>商品名</th>
+            <th>税抜価格</th>
+            <th>ジャンル</th>
+            <th>ステータス</th>
+          </tr>
+        </thead>
+      
+      <tbody>
+        <% @items.each do |item| %>
+          <tr>
+            <td><%= item.id %></td>
+            <td>
+              <% if item.image.attached? %>
+                <%= image_tag item.image, size:"70x70" %>
+              <% else %>
+                <%= image_tag "no-image", size:"70x70" %>
+              <% end %>  
+            </td>
+            <td>
+              <%= link_to item.name, admin_item_path(item) %>
+            </td>
+            <td><%= item.price.to_s(:delimited) %>円</td>
+            <td><%= item.genre.name %></td>
+            <td>
+              <% if item.is_active %>
+                 <p class="text-success">販売中</p>
+              <% else %>
+                <p  class="text-danger">販売停止</p>
+              <% end %>
+            </td>
+          </tr>
         <% end %>
-      </td>
-    </tr>
-  <% end %>  
-</table>
+      </tbody>
+    </div>
+  </div>
+</div>
+<%= paginate @items %>

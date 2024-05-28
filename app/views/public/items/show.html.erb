@@ -1,19 +1,84 @@
-<h1>商品詳細</h1>
-<p><%= link_to "商品一覧へ", items_path %></p>
-<p>
-  <% if @item.image.attached? %>
-    <%= image_tag @item.image, size:"200x200" %>
-  <% else %>
-    <%= image_tag "no-image", size:"200x200" %>
-  <% end %>  
-</p>
-<p><%= @item.genre.name %></p>
-<p><%= @item.name %></p>
-<p><%= @item.price %>円</p>
-<% if @item.is_active %>
-  <p>販売中</p>
-<% else %>
-  <p>販売停止</p>
-<% end %>
-</p>
-<p><%= @item.introduction %></p>
+<div class="container">
+   <h4 class="p-3 d-inline-block" style="background-color: #CCCCCC; margin-bottom: 40px;">
+     商品詳細
+    </h4>
+</div>
+  
+   <div class="container">
+    <div class="row">
+     <div class="col-md-4">
+      <% if @item.image.attached? %>
+        <%= image_tag @item.image, size:"300x300", class: "img-fluid" %>
+      <% else %>
+        <%= image_tag "no-image", size:"300x300", class: "img-fluid" %>
+      <% end %>
+    </div>
+
+  <div class="col-md-8">
+    <div class="container">
+      <div class="row">
+        <div style="display: flex; margin-bottom: 20px;">
+          <span style="margin-left: 5px;">
+            <h4><%= @item.genre.name %></h4>
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div style="display: flex; margin-bottom: 20px;">
+          <span style="margin-left: 5px;">
+            <h4><%= @item.name %></h4>
+          </span>
+        </div>
+      </div>  
+      <div class="row">
+        <div style="display: flex; margin-bottom: 20px;">
+          <span style="margin-left: 5px;">      
+            <h4><%= @item.with_tax_price.to_s(:delimited) %>円</h4>
+            <% if @item.is_active %>
+              <p class="text-success">販売中</p>
+            <% else %>
+              <p class="text-danger">販売停止</p>
+            <% end %>
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div style="display: flex; margin-bottom: 20px;">
+          <span style="margin-left: 5px;">      
+            <h4><%= @item.introduction %></h4>
+          </span>
+        </div>
+      </div>
+      <%= form_with model:@cart_item_new, local:true do |f| %>
+        <div class="row">
+          <div style="display: flex; margin-bottom: 20px;">
+            <span style="margin-left: 5px;">
+              <%= f.hidden_field :item_id, value: @item.id %>
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div style="display: flex; margin-bottom: 20px;">
+            <span style="margin-left: 5px;">
+              <%= f.select :amount, (1..10), class: "form-control", size: 3 %>
+            </span>
+          </div>
+        </div>
+        <div class="row">
+          <div style="display: flex; margin-bottom: 20px;">
+            <span style="margin-left: 5px;">
+               <%= f.submit 'カートに追加', class: 'btn btn-primary  btn-lg' %>
+            </span>
+          </div>
+        </div>
+      <% end %>
+      <div class="row">
+        <div style="display: flex; margin-bottom: 20px;">
+          <span style="margin-left: 5px;">
+            <%= link_to "商品一覧へ", items_path, class: "btn btn-primary  btn-lg" %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

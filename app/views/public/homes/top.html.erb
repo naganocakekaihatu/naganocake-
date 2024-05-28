@@ -1,1 +1,37 @@
-<h1>お客様トップページ</h1>
+<div class="code-container">
+  <div class="text-center">
+    <style>
+      .code-container h4 {
+        font-size: 45px; /* 好みのサイズに調整してください */
+      }
+    </style>
+
+    <h4>
+      ようこそながのCAKEへ！<br>
+      このサイトは、ケーキ販売のECサイトになります。<br>
+      会員でない方も商品の閲覧はできますが、<br>
+      購入には会員登録が必要になります。
+    </h4>
+
+    <div class="d-flex justify-content-center" style="font-size: 20px;">
+      <h3>新着商品</h3>
+    </div>
+    <div>
+      <% @items.last(4).each do |item| %>
+        <div style="display: inline-block; text-align: center; margin: 10px;">
+          <%= link_to item_path(item.id) do %>
+            <% if item.image.attached? %>
+              <%= image_tag item.image, size: "100x100", class: "img-fluid" %>
+            <% else %>
+              <%= image_tag "no-image", size: "100x100", class: "img-fluid" %>
+            <% end %>
+          <% end %><br>
+          <%= item.name %><br>
+          ¥<%= item.with_tax_price.to_s(:delimited) %>
+        </div>
+      <% end %>
+    </div>
+
+    <%= link_to "全ての商品を見る＞", items_path, class: "btn btn-primary mt-3" %>
+  </div>
+</div>

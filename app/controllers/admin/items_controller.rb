@@ -1,14 +1,16 @@
-module Admin
-  class ItemsController < ApplicationController
+# module Admin ←モデル名Adminが存在し、名前がブッキングしてエラーになるのでコメントアウトしてます
+  class Admin::ItemsController < ApplicationController
+    before_action :authenticate_admin!
+    
     def index
-      @items = Item.all
+      @items = Item.all.page(params[:page])
     end
-  
+
     def new
       @item = Item.new
       @genres = Genre.all
     end
-  
+
     def create
       @item = Item.new(item_params)
       if @item.save
@@ -19,16 +21,16 @@ module Admin
         render :new
       end
     end
-  
+
     def show
       @item = Item.find(params[:id])
     end
-  
+
     def edit
       @item = Item.find(params[:id])
       @genres = Genre.all
     end
-  
+
     def update
       @item = Item.find(params[:id])
       if @item.update(item_params)
@@ -39,18 +41,18 @@ module Admin
         render :edit
       end
     end
-    
+
     def destroy
       item = Item.find(params[:id])
       item.destroy
       flash[:notice] = "商品を削除しました。"
       redirect_to admin_items_path
     end
-    
+
     private
-    
+
     def item_params
       params.require(:item).permit(:image, :genre_id, :name, :price, :introduction, :is_active)
-    end  
+    end
   end
-end
+# end

@@ -1,2 +1,47 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<div class="container">
+   <h4 class="p-3 d-inline-block" style="background-color: #CCCCCC; margin-bottom: 40px;">
+     <strong>管理者</strong>ログイン
+   </h4>
+</div>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+ <div class="container">
+  <div class="row">
+    <div class="col-12 d-flex justify-content-center">
+     <table>
+         <tr>
+            <th>
+               <p class="text-left  mt-2 mb-2"> 
+                 <%= f.label "メールアドレス" %>
+               </p> 
+            </th> 
+            <td style="padding-left: 50px;">
+               <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control-lg", style: "width: 500px;", placeholder: "naganocake@example.com"  %>
+            </td>
+         </tr>
+        <tr>
+            <th>&nbsp;</th>
+            <td>&nbsp;</td>
+        </tr> 
+         <tr>
+            <th>
+                <p class="text-left  mt-2 mb-2">  
+                 <%= f.label "パスワード" %> 
+                </p> 
+            </th> 
+            <td style="padding-left: 50px;">
+             <%= f.password_field :password, autocomplete: "current-password", class: "form-control-lg", style: "width: 500px;" %>
+            </td>
+         </tr>
+         <tr>
+            <th></th>
+            <td style="padding-left: 50px; padding-top: 40px;">
+             <%= f.submit "ログイン", class: "btn btn-primary", style: "width: 200px;"%>
+            </td>
+         </tr>
+     </table>
+    </div>
+  </div>
+ </div>
+<% end %>
+
+<%= render "admin/shared/links" %>

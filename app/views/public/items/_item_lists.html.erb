@@ -1,0 +1,60 @@
+<div class="container p-3 p-sm-0">
+  <div class="row">
+    <div class="col-md-2">
+      <h3 class="my-5">カテゴリー</h3>
+      <p><%= link_to "すべて", items_path %></p>
+      <% genres.each do |genre| %>
+        <p><%= link_to genre.name, genre_searches_path(genre_id: genre.id), method: :get %></p>
+      <% end %>
+    </div>
+    <div class="col-md-9 offset-md-1">
+      <h1><%= title.html_safe %></h1>
+      <div class="mb-4">
+        <%= form_with url: search_path, local: true, method: :get do |f| %>
+          <% if genre_id.present? %>
+            <%= f.hidden_field :genre_id, value: genre_id %>
+          <% end %>
+          <%= f.text_field :word, placeholder: "検索ワードの入力" %>
+          <%= f.submit "検索" %>
+        <% end %>
+      </div>
+      
+      <div class="main-content">
+        <div class="row p-3">
+          <% items.each do |item| %>
+            <div class="col-md-4">
+              <div class="content">
+                <% if item.image.attached? %>
+                  <%= link_to image_tag(item.image, size: "100x100"), item_path(item) %>
+                <% else %>
+                  <%= link_to image_tag("no-image", size: "100x100"), item_path(item) %>
+                <% end %>
+                <br>
+                <%= link_to item.name, item_path(item) %>
+                <br>
+                <%= item.price %>円
+                <% if item.is_active %>
+                  <span>販売中</span>
+                <% else %>
+                  <span>販売停止</span>
+                <% end %>
+                <br>
+                <%= form_with(model: cart_item_new, local: true) do |f| %>
+                  <%= f.hidden_field :item_id, value: item.id %>
+                  <%= f.select :amount, (1..10).to_a %>
+                  <%= f.submit 'カートに追加', class: 'btn btn-primary' %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      
+      <div style="text-align: center;">
+        <div class="m-4 pagination" style="display: inline-block; margin-top: 10px;">
+          <%= paginate items %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

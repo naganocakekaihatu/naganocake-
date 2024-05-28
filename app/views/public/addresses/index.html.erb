@@ -1,2 +1,73 @@
-<h1>Addresses#index</h1>
-<p>Find me in app/views/addresses/index.html.erb</p>
+<div class="container">
+   <h4 class="p-3 d-inline-block" style="background-color: #CCCCCC; margin-bottom: 40px;">
+     配送先登録・一覧
+   </h4>
+</div>
+
+<%= form_for @address, url: addresses_path, method: :post do |f| %>
+  <div class="container">
+    <div class="row">
+      <div style="display: flex; margin-bottom: 20px;">
+        <span style="margin-left: -50px;">
+          <%= f.label :postal_code, "郵便番号(ハイフンなし)" %>
+        </span>
+        <span style="margin-left: 90px;"> 
+          <%= f.text_field :postal_code, class: "form-control", autofocus: true, autocomplete: "postal_code" , style: "width: 450px;"%>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div style="display: flex; margin-bottom: 20px;">
+        <span style="margin-left: -50px;"> 
+         <%= f.label :address, "住所" %>
+        </span>
+        <span style="margin-left: 228px;"> 
+         <%= f.text_field :address, class: "form-control", autofocus: true, autocomplete: "address", style: "width: 800px;" %>
+        </span>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div style="display: flex; margin-bottom: 20px;">
+        <span style="margin-left: -50px;"> 
+          <%= f.label :name, "宛名" %>
+        </span>
+        <span style="margin-left: 228px;"> 
+          <%= f.text_field :name, class: "form-control", autofocus: true, autocomplete: "name", style: "width: 450px;" %>
+        </span>
+        <span style="margin-left: 228px;"> 
+          <%= f.submit "新規登録", class: "btn btn-success", style: "width: 200px;" %>
+        </span>
+      </div>
+    </div>
+   
+  
+
+<% end %>
+
+<h1 class="text-center mt-4">登録情報</h1>
+
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th scope="col">郵便番号</th>
+      <th scope="col">住所</th>
+      <th scope="col">宛名</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @addresses.each do |address| %>
+      <tr>
+        <td><%= address.postal_code %></td>
+        <td><%= address.address %></td>
+        <td><%= address.name %></td>
+        <td>
+          <%= link_to "編集する", edit_address_path(address), method: :get, class: "btn btn-info" %>
+          <%= link_to '削除する', address_path(address), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p class="text-center">Find me in app/views/addresses/index.html.erb</p>

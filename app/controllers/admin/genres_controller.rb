@@ -1,5 +1,6 @@
-module Admin
-  class GenresController < ApplicationController
+# module Admin　←モデル名Adminが存在し、名前がブッキングしてエラーになるのでコメントアウトしてます
+  class Admin::GenresController < ApplicationController
+    before_action :authenticate_admin!
     
     def index
       @genre = Genre.new
@@ -44,4 +45,4 @@ module Admin
       params.require(:genre).permit(:name)
     end
   end
-end
+# end
