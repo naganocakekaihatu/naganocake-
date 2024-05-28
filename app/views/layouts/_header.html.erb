@@ -1,30 +1,36 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/"><span><%= image_tag "shortcake_icon", size:"50x30" %></span></a>
+      <a class="navbar-brand" href="/">
+         <%= image_tag 'cakerogo.webp', size: '150x150' %><br>
+          ==ながのCAKE==<i class="fas fa-leaf"></i>
+      </a>
       <ul class="navbar-nav">
         <% if customer_signed_in? %>
-          <div class="mt-3 mr-5 text-white">
-            <i class="fas fa-sign-language"></i>ようこそ、<%= current_customer.family_name + current_customer.first_name %>さん!
+          <div class="mt-2 mr-5 text-white" style="margin-right: 40px;">
+            <h3>
+              <i class="fas fa-sign-language"></i>
+              ようこそ、<%= current_customer.family_name + current_customer.first_name %>さん!
+            </h3>
           </div>
           <li class="nav-item">
             <%= link_to customer_path(current_customer), class: "nav-link text-light"  do %>
-              <i class="fab fa-ello"></i>マイページ
+               <h5><i class="fab fa-ello"></i>マイページ</h5>
             <% end %>
           </li>
           <li class="nav-item">
             <%= link_to items_path, class: "nav-link text-light" do %>
-              <i class="fas fa-cheese"></i>商品一覧
+              <h5><i class="fas fa-cheese"></i>商品一覧</h5>
             <% end %>
           </li>
           <li class="nav-item">
             <%= link_to cart_items_path, class: "nav-link text-light" do %>
-              <i class="fas fa-shopping-cart"></i>カート
+               <h5><i class="fas fa-shopping-cart"></i>カート </h5>
             <% end %>
           </li>
           <li class="nav-item">
             <%= link_to destroy_customer_session_path, method: :delete, class: "nav-link text-light" do %>
-              <i class="fas fa-door-open"></i>ログアウト
+               <h5><i class="fas fa-door-open"></i>ログアウト </h5>
             <% end %>
           </li>
         <% elsif admin_signed_in? %>
