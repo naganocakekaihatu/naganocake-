@@ -49,28 +49,28 @@
           </span>
         </div>
       </div>
-      <div class="row">
-        <div style="display: flex; margin-bottom: 20px;">
-          <span style="margin-left: 5px;">
-             <%= form_with model:@cart_item_new, local:true do |f| %>
-             <%= f.hidden_field :item_id, value: @item.id %>
-          </span>
+      <%= form_with model:@cart_item_new, local:true do |f| %>
+        <div class="row">
+          <div style="display: flex; margin-bottom: 20px;">
+            <span style="margin-left: 5px;">
+              <%= f.hidden_field :item_id, value: @item.id %>
+            </span>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div style="display: flex; margin-bottom: 20px;">
-          <span style="margin-left: 5px;">
-            <%= f.select :amount, (1..10), class: "form-control", size: 3 %>
-          </span>
+        <div class="row">
+          <div style="display: flex; margin-bottom: 20px;">
+            <span style="margin-left: 5px;">
+              <%= f.select :amount, (1..10), class: "form-control", size: 3 %>
+            </span>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div style="display: flex; margin-bottom: 20px;">
-          <span style="margin-left: 5px;">
-             <%= f.submit 'カートに追加', class: 'btn btn-primary  btn-lg' %>
-          </span>
+        <div class="row">
+          <div style="display: flex; margin-bottom: 20px;">
+            <span style="margin-left: 5px;">
+               <%= f.submit 'カートに追加', class: 'btn btn-primary  btn-lg' %>
+            </span>
+          </div>
         </div>
-      </div>
       <% end %>
       <div class="row">
         <div style="display: flex; margin-bottom: 20px;">
